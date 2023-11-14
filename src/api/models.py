@@ -4,9 +4,9 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    username = db.Column(db.String(120), unique=True, nullable=False)
+    role = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -14,6 +14,127 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
+            "username": self.username,
+            "role": self.role,
             # do not serialize the password, its a security breach
+        }
+
+class Seccion_1(db.Model):
+    __tablename__ = 'seccion_1'  
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    manufacturer = db.Column(db.String(100))
+    gender = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    price = db.Column(db.Numeric(precision=10, scale=2))
+
+
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'manufacturer': self.manufacturer,
+        'material': self.material,
+        'type': self.type,
+        'price': str(self.price),  
+        }
+
+class Seccion_2(db.Model):
+    __tablename__ = 'seccion_2'  
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    manufacturer = db.Column(db.String(100))
+    gender = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    price = db.Column(db.Numeric(precision=10, scale=2))
+
+
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'manufacturer': self.manufacturer,
+        'material': self.material,
+        'type': self.type,
+        'price': str(self.price),  
+        }
+
+class Seccion_3(db.Model):
+    __tablename__ = 'seccion_3'  
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    manufacturer = db.Column(db.String(100))
+    gender = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    price = db.Column(db.Numeric(precision=10, scale=2))
+
+
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'manufacturer': self.manufacturer,
+        'material': self.material,
+        'type': self.type,
+        'price': str(self.price),  
+        }
+
+class Seccion_4(db.Model):
+    __tablename__ = 'seccion_4'  
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    manufacturer = db.Column(db.String(100))
+    gender = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    price = db.Column(db.Numeric(precision=10, scale=2))
+
+
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'manufacturer': self.manufacturer,
+        'material': self.material,
+        'type': self.type,
+        'price': str(self.price),  
+        }
+
+class Seccion_5(db.Model):
+    __tablename__ = 'seccion_5'  
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    manufacturer = db.Column(db.String(100))
+    gender = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    price = db.Column(db.Numeric(precision=10, scale=2))
+
+
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'manufacturer': self.manufacturer,
+        'material': self.material,
+        'type': self.type,
+        'price': str(self.price),  
+        }
+
+class Seccion_6(db.Model):
+    __tablename__ = 'seccion_6'  
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    manufacturer = db.Column(db.String(100))
+    gender = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    price = db.Column(db.Numeric(precision=10, scale=2))
+
+
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'manufacturer': self.manufacturer,
+        'material': self.material,
+        'type': self.type,
+        'price': str(self.price),  
         }
