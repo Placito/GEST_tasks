@@ -1,0 +1,22 @@
+.navbar-box {
+    background-color: #1B3255;
+}
+.task-paragraf {
+    color: #056FAA;
+    font-weight: 400;
+    font-size: 30px;
+    margin-top: auto;
+}
+.img {
+    margin-top: 2px;
+    height:170px;
+    width: 210px; 
+}
+.btn-logout {
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    border: solid 1px black;
+    padding: 0 10px;
+    display: none;
+}

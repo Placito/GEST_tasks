@@ -5,3 +5,14 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+h1  {
+    color: white;
+}
+.roles-box {
+    display: flex;
+    gap: 30px;
+    text-align: center;
+    color: #1B3255;
+    font-weight: 500;
+    font-size: 30px;
+}

@@ -4,12 +4,16 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+import { Login } from "./pages/login";
+import { Choose_1 } from "./pages/choose_1";
+import { Choose_2 } from "./pages/choose_2";
+import { Choose_3 } from "./pages/choose_3";
+import { Table_sectors } from "./pages/table_sectores";
+import { Table_users } from "./pages/table_users";
+import { Chatbot } from "./pages/chatbot";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
 
 //create your first component
 const Layout = () => {
@@ -26,11 +30,15 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<Choose_1 />} path="/choose_1" />
+                        <Route element={<Choose_2 />} path="/choose_2" />
+                        <Route element={<Choose_3 />} path="/choose_3" />
+                        <Route element={<Table_sectors />} path="/table_sectors" />
+                        <Route element={<Table_users />} path="/table_users" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <Footer />
+                    <Chatbot />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
