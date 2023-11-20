@@ -57,20 +57,12 @@ export const Login = () => {
 			  <br/>
 			  <br/>
 			  <br/>
-			  <div className="d-flex justify-content-between">
+			  <div className="text-center">
 				<button
 				  className="btn-login"
 				>
 				  Login
 				</button>
-				<Link className="link" to="/signup">
-				  <button
-					className="btn-login"
-					type="submit"
-				  >
-					Register
-				  </button>
-				</Link>
 			  </div>
 			</div>
 		  </div>
