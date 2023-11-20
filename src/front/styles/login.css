@@ -1,0 +1,60 @@
+.text-login {
+    color: white;
+    font-size: 80px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 2px;
+  }
+  .form-check-input-container {
+     margin-right: 10px;
+    }
+    .form-input-login {
+      background-color: #D9D9D9;
+      width: 100%;
+      border: none;
+      border-radius: 20px;
+      outline: #D9D9D9;
+    }
+    .form-check-input-login  {
+      background-color: #D9D9D9;
+    }
+    .btn-login {
+      background-color: #1B3255;
+      color: white;
+      padding: 10px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 7px 3px 7px;
+      border-radius: 6px;
+      border: 0px;
+    }
+    .line-login {
+      border: solid 1px #D9D9D9;
+      height: 1px;
+    }
+    .or {
+        color: #D9D9D9;
+    }
+    .remember {
+        color: #D9D9D9;
+    }
+    .forgot-link {
+      color: #D9D9D9;
+      font-style: italic;
+      text-decoration: none;
+      font-size: smaller;
+      text-align: end;
+      padding-left: 20px;
+    }
+    .forgot-link:hover {
+      color: #D9D9D9;
+      font-weight: 700;
+    }
+    /*css to make the site responsive*/
+  @media screen and (max-width: 1000px) {
+    .text-login {
+      font-size: 50px;
+    }
+    .btn-login-google {
+      height: 40px;
+    }
+  }
