@@ -1,0 +1,35 @@
+.box {
+    display: flex;
+    justify-content: space-between;
+}
+.btn-tasks {
+    color: #1B3255;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    border: solid 1px #1B3255;
+    padding: 10px 90px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
+}
+.buttons {
+    display: grid;
+    gap: 30px;
+}
+.title {
+    width: 50%;
+}
+.btn-arrow {
+    color: white;
+    font-weight: 700;
+    font-size: 60px;
+}
+.legend-arrow {
+    color: white;
+    visibility: hidden;
+}
+.set-arrow {
+    align-items: baseline;
+    margin-top: 330px;
+}
+.set-arrow:hover .legend-arrow {
+    visibility: visible;
+}
