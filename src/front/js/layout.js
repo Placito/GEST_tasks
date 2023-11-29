@@ -9,7 +9,7 @@ import { Login } from "./pages/login";
 import { Choose_1 } from "./pages/choose_1";
 import { Choose_2 } from "./pages/choose_2";
 import { Choose_3 } from "./pages/choose_3";
-import { Table_sectors } from "./pages/table_sectores";
+import { Table_sectors } from "./pages/table_sectors";
 import { Table_users } from "./pages/table_users";
 import { Chatbot } from "./pages/chatbot";
 import injectContext from "./store/appContext";
