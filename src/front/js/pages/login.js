@@ -1,12 +1,39 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../../styles/login.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
-	const params = useParams();
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
+	const handleClick = () => {
+
+		const opts = {
+			method: 'POST',
+			headers: {
+				"content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				"username": username,
+				"passsword": password
+			})
+		}
+		fetch(process.env.BACKEND_URL + '/api/token', opts)
+		.then(resp => {
+			console.log(resp)
+			if(resp.status === 200) return resp.json();
+			else alert("There has been some error");
+		})
+		.then(data => {
+			sessionStorage.setItem("token", data.access_token);
+		})
+		.catch(error => {
+			console.error(error);
+		})
+	}
 	return (
 		<div className="container">
 			<h4 className="text-login">Login to your account:</h4>
@@ -14,19 +41,21 @@ export const Login = () => {
 			  <br />
 			  <div className="form-outline mb-4">
 				<input
-				  type="email"
-				  id="typeEmailX-2"
+				  type="text"
 				  className="form-control-lg form-input-login"
 				  placeholder="Username"
+				  value = {username}
+				  onChange={(e) => setUsername(e.target.value)}
 				  required
 				/>
 			  </div>
 			  <div className="form-outline mb-4">
 				<input
 				  type="password"
-				  id="typePasswordX"
 				  className="form-control-lg form-input-login"
 				  placeholder="Password"
+				  value = {password}
+				  onChange={(e) => setPassword(e.target.value)}
 				  required
 				/>
 			  </div>
@@ -60,6 +89,7 @@ export const Login = () => {
 			  <div className="text-center">
 				<button
 				  className="btn-login"
+				  onClick={handleClick}
 				>
 				  Login
 				</button>
