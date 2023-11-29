@@ -7,36 +7,16 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const token = sessionStorage.getItem("token");
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-
-		const opts = {
-			method: 'POST',
-			headers: {
-				"content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				"username": username,
-				"passsword": password
-			})
-		}
-		fetch(process.env.BACKEND_URL + '/api/token', opts)
-		.then(resp => {
-			console.log(resp)
-			if(resp.status === 200) return resp.json();
-			else alert("There has been some error");
-		})
-		.then(data => {
-			sessionStorage.setItem("token", data.access_token);
-		})
-		.catch(error => {
-			console.error(error);
-		})
+		actions.login()
 	}
 	return (
 		<div className="container">
 			<h4 className="text-login">Login to your account:</h4>
+			{token && token != "" && token != undefined ? navigate("/details_Sectors") :  
 			<div >
 			  <br />
 			  <div className="form-outline mb-4">
@@ -95,6 +75,7 @@ export const Login = () => {
 				</button>
 			  </div>
 			</div>
+			}
 		  </div>
 	);
 };
