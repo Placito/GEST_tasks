@@ -36,7 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			syncTokenFromSessionStorage: () => {
 				const token = sessionStorage.getItem("token");
-				if (token && token != "" && token != undefined) setStore({token: token})
+				if (token && token != "" && token != undefined) setStore({token: token});
 			},
 			login: async (username, password) => {
 				const opts = {
@@ -65,6 +65,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("There has been an error!");
 				}
 				
+			},
+			logout: () => {
+				sessionStorage.removeItem("token");
+				setStore({token: null});
 			},
 			changeColor: (index, color) => {
 				//get the store

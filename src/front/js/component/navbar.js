@@ -1,9 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-box">
 			<div className="container-fluid">
@@ -13,9 +15,11 @@ export const Navbar = () => {
 					</Link>
 					<p className="task-paragraf">Task managemnet software</p>
 				</div>
+				{ !store.token ?
 				<form className="d-flex">
-					<button className="btn-logout" type="submit">Logout</button>
+					<button onClick ={() => actions.logout()} className="btn-logout" type="submit">Logout</button>
 				</form>
+				: "" }
 			</div>
 		</nav>
 	);
