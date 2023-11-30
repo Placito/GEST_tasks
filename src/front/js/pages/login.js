@@ -7,16 +7,16 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const token = sessionStorage.getItem("token");
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		actions.login()
+		actions.login(username, password)
 	}
+
 	return (
 		<div className="container">
 			<h4 className="text-login">Login to your account:</h4>
-			{token && token != "" && token != undefined ? navigate("/details_Sectors") :  
+			{store.token && store.token != "" && store.token != undefined ? navigate.push("/details_Sectors") :  
 			<div >
 			  <br />
 			  <div className="form-outline mb-4">

@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			token: null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -33,7 +34,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			login: (username, password) => {
+			syncTokenFromSessionStorage: () => {
+				const token = sessionStorage.getItem("token");
+				if (token && token != "" && token != undefined) setStore({token: token})
+			},
+			login: async (username, password) => {
 				const opts = {
 					method: 'POST',
 					headers: {
@@ -44,18 +49,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"passsword": password
 					})
 				}
-				fetch('https://glorious-space-succotash-7jxpv6jj6xw2pp6j-3001.app.github.dev/api/token', opts)
-				.then(resp => {
-					console.log(resp)
-					if(resp.status === 200) return resp.json();
-					else alert("There has been some error");
-				})
-				.then(data => {
+				try {
+					const resp = await fetch('https://glorious-space-succotash-7jxpv6jj6xw2pp6j-3001.app.github.dev/api/token', opts)
+					if(resp.status !== 200) {
+						alert("There has been some error");
+						return false;
+				}
+					const data = await resp.jon();
+					console.log("This came from the backend", data);
 					sessionStorage.setItem("token", data.access_token);
-				})
-				.catch(error => {
-					console.error(error);
-				})
+					setStore({token: data.access_token})
+					return true;
+				}
+				catch(error){
+					console.error("There has been an error!");
+				}
+				
 			},
 			changeColor: (index, color) => {
 				//get the store
