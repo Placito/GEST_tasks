@@ -1,6 +1,6 @@
 ## Description of GEST_tasks!
 
-Is an application to assist in task management, with the implementation and integration of the various work sectors and their workers in real time so they don't lose information.
+Is an application to assist in task management, for internal roles. With the implementation and integration of the various work sectors and their workers in real time so they don't lose information.
 For that I use a boilerplate with React and Flask.
 
 ## Output example:
