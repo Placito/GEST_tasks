@@ -3,6 +3,10 @@
 Is an application to assist in task management, with the implementation and integration of the various work sectors and their workers in real time so they don't lose information.
 For that I use a boilerplate with React and Flask.
 
+## Output example:
+![image](https://github.com/Placito/GEST_tasks/assets/101410421/fb5b77dd-abd9-4d6b-bc1f-9d6b331d8241)
+![image](https://github.com/Placito/GEST_tasks/assets/101410421/fb85d649-e28c-44cf-a64f-0b87c2d6cb8e)
+
 # WebApp boilerplate with React JS and Flask API
 
 Build web applications using React.js for the front end and python/flask for your backend API.
