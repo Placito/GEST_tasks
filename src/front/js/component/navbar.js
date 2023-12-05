@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
 
