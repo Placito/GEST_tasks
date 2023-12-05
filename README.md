@@ -1,7 +1,7 @@
 ## Description of GEST_tasks!
 
 Is an application to assist in task management, with the implementation and integration of the various work sectors and their workers in real time so they don't lose information.
-For that I use a boilertemplate with React and Flask.
+For that I use a boilerplate with React and Flask.
 
 # WebApp boilerplate with React JS and Flask API
 
