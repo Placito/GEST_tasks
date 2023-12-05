@@ -4,7 +4,8 @@ Is an application to assist in task management, with the implementation and inte
 For that I use a boilerplate with React and Flask.
 
 ## Output example:
-![image](https://github.com/Placito/GEST_tasks/assets/101410421/fb5b77dd-abd9-4d6b-bc1f-9d6b331d8241)
+![image](https://github.com/Placito/GEST_tasks/assets/101410421/95f556db-4f31-4ccd-8750-4ed0a3736844)
+![image](https://github.com/Placito/GEST_tasks/assets/101410421/9d650774-07b7-4290-8a76-90d2570efd73)
 ![image](https://github.com/Placito/GEST_tasks/assets/101410421/fb85d649-e28c-44cf-a64f-0b87c2d6cb8e)
 
 # WebApp boilerplate with React JS and Flask API
