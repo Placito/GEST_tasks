@@ -23,6 +23,7 @@ export const Login = () => {
 				<input
 				  type="text"
 				  className="form-control-lg form-input-login"
+				  id="typeUsernameX"
 				  placeholder="Username"
 				  value = {username}
 				  onChange={(e) => setUsername(e.target.value)}
@@ -32,6 +33,7 @@ export const Login = () => {
 			  <div className="form-outline mb-4">
 				<input
 				  type="password"
+				  id="typePasswordX"
 				  className="form-control-lg form-input-login"
 				  placeholder="Password"
 				  value = {password}
