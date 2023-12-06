@@ -10,6 +10,7 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
 # from models import Person
@@ -24,6 +25,9 @@ app.url_map.strict_slashes = False
 app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET')
 jwt = JWTManager(app)
 
+# Initialize CORS
+#CORS(app, origins="*")
+CORS(app, origins=[os.getenv("FRONTEND_URL")])
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
