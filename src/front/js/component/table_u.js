@@ -1,13 +1,23 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/table.css";
 
 export const Table_u = () => {
 	const { store, actions } = useContext(Context);
+	const [newTask, setNewTask] = useState("");
+	const [task, setTask] = useState(["Make the bed", "Wash my hands"]);
+
+// Get the value of a input when press the key Enter
+const handleKeyDown = event => {
+	if (event.key === 'Enter') {
+		setTask(task.concat(newTask)) 
+		setNewTask("");
+	}}
+	
 
 	return (
 		<div className="container mt-5">
-				<table className="table table-hover table-box">
+				<table className="table table-hover table-box" onKeyDown={handleKeyDown} onChange={e => setNewTask(e.target.value)} value={newTask} id="add-task">
 					<thead className="header-table">
 						<tr>
 						<th scope="col">Id's user</th>
