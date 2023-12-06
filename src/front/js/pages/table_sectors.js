@@ -10,7 +10,7 @@ export const Table_sectors = () => {
 		<div className="container mt-5">
 			<h1>Consult:</h1>
 			{task.map(item => (
-				<Table_p text={item}/>
+				<Table_p text={item} removeTodo = {removeTodo} />
 				))}
 		</div>
 	);

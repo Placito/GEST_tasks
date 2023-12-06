@@ -10,7 +10,7 @@ export const Table_users = () => {
 		<div className="container mt-5">
 			<h1>Consult users:</h1>
 			{task.map(item => (
-				<Table_u text={item}/>
+				<Table_u text={item} removeTodo = {removeTodo} />
 				))}
 		</div>
 	);
