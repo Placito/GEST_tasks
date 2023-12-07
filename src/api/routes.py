@@ -60,7 +60,7 @@ def send_reset_email():
         else:
             # Generate an access token and construct the reset link
             token = create_access_token(identity=user.email)
-            link = f"https://silver-cod-gvp74jvvwjqc9vxp-3000.app.github.dev/newPassword?token={token}"
+            # link = f" /newPassword?token={token}"
 
             message = Message(
                 subject="Password Reset Link",

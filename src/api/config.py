@@ -3,7 +3,7 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('FLASK_APP_KEY', 'fallback-secret-key')
-    # QLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'fallback-db-uri')
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'fallback-db-uri')
     # SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'fallback-jwt-secret-key')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
@@ -14,4 +14,4 @@ class Config:
     MAIL_PASSWORD = 'ahyz rgmy igtb yclg'
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    FRONTEND_URL = 'https://silver-cod-gvp74jvvwjqc9vxp-3000.app.github.dev'
+    FRONTEND_URL = ''
