@@ -8,8 +8,11 @@ from flask_cors import CORS, cross_origin
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from flask_mail import Mail, Message, current_app
 
 api = Blueprint('api', __name__)
+
+mail = Mail()
 
 # Allow CORS requests to this API
 CORS(api)
@@ -56,7 +59,7 @@ def send_reset_email():
         else:
             # Generate an access token and construct the reset link
             token = create_access_token(identity=user.email)
-            # link = f" /newPassword?token={token}"
+            link = f"https://humble-bassoon-q5xp7j55gjgh6wwj-3000.app.github.dev/newPassword?token={token}"
 
             message = Message(
                 subject="Password Reset Link",
@@ -70,3 +73,26 @@ def send_reset_email():
             return jsonify({"message": "Password reset email sent successfully"}), 200
     except Exception as e:
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
+
+# Endpoint for updating the password
+@api.route("/newPassword", methods=["POST"])
+@jwt_required()
+@cross_origin()
+def reset_password():
+    try:
+        password = request.json.get("password", None)
+        email = get_jwt_identity()
+
+        # Query the database to check if the email exists
+        user = User.query.filter_by(email=email).first()
+        if user is None:
+            return jsonify({"msg": "User with this email does not exist."}), 404
+        # Update the user's password
+        User.password = password
+        print(User.password)
+        # Commit the changes to the database
+        db.session.commit()
+
+        return jsonify({"msg": "Password reset successful."}), 200
+    except Exception as e:
+        return jsonify({"msg": "An error occurred", "error": str(e)}), 500
