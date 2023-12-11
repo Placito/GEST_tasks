@@ -14,4 +14,4 @@ class Config:
     MAIL_PASSWORD = 'ahyz rgmy igtb yclg'
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    FRONTEND_URL = ''
+    FRONTEND_URL = 'https://humble-bassoon-q5xp7j55gjgh6wwj-3000.app.github.dev'
