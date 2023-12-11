@@ -5,8 +5,6 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS, cross_origin
-from flask_mail import Mail, Message
-from flask import current_app
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
@@ -16,8 +14,6 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 cors = CORS(api, resources={r"/api/*": {"origins": "*"}})
-
-mail = Mail()
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
@@ -30,6 +26,7 @@ def create_token():
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=username)
+<<<<<<< HEAD
     return jsonify(access_token=access_token)
 
 # endpoint for send an email with a link to reset password
@@ -74,3 +71,6 @@ def send_reset_email():
             return jsonify({"message": "Password reset email sent successfully"}), 200
     except Exception as e:
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
+=======
+    return jsonify(access_token=access_token)
+>>>>>>> parent of da28cd7 (reset password)
