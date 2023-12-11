@@ -26,7 +26,6 @@ def create_token():
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=username)
-<<<<<<< HEAD
     return jsonify(access_token=access_token)
 
 # endpoint for send an email with a link to reset password
@@ -71,6 +70,3 @@ def send_reset_email():
             return jsonify({"message": "Password reset email sent successfully"}), 200
     except Exception as e:
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
-=======
-    return jsonify(access_token=access_token)
->>>>>>> parent of da28cd7 (reset password)
