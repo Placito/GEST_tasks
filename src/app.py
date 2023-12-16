@@ -27,7 +27,7 @@ jwt = JWTManager(app)
 
 # Initialize CORS
 #CORS(app, origins="*")
-#CORS(app, origins=[os.getenv("FRONTEND_URL")])
+CORS(app, origins=[os.getenv("FRONTEND_URL")])
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
