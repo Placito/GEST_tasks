@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
 
-export const Navbar = () => {
+export const Navbar = (token) => {
 	const { store, actions } = useContext(Context);
 
 	return (
@@ -16,7 +16,7 @@ export const Navbar = () => {
 					</Link>
 					<p className="task-paragraf">Task managemnet software</p>
 				</div>
-				{ !store.token ?
+				{ store.token ?
 				<form className="d-flex">
 					<button onClick ={() => actions.logout()} className="btn-logout" type="submit">Logout</button>
 				</form>
