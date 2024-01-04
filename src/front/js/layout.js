@@ -12,7 +12,7 @@ import { Choose_2 } from "./pages/choose_2";
 import { Choose_3 } from "./pages/choose_3";
 import { Table_sectors } from "./pages/table_sectors";
 import { Table_users } from "./pages/table_users";
-import { Chatbot } from "./pages/chatbot";
+// import { Chatbot } from "./pages/chatbot";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -42,7 +42,6 @@ const Layout = () => {
                         <Route element={<Table_users />} path="/table_users" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <Chatbot />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
