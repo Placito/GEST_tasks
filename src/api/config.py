@@ -1,5 +1,6 @@
 from datetime import timedelta
 import os
+import openai
 
 class Config:
     SECRET_KEY = os.environ.get('FLASK_APP_KEY', 'fallback-secret-key')
@@ -15,3 +16,4 @@ class Config:
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
     FRONTEND_URL = 'https://humble-bassoon-q5xp7j55gjgh6wwj-3000.app.github.dev'
+    # openAI API KEY

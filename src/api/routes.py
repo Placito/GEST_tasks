@@ -76,7 +76,7 @@ def send_reset_email():
 # Endpoint for updating the password
 @api.route("/newPassword", methods=["POST"])
 @jwt_required()
-@cross_origin()
+@cross_origin(origin="process.env.FRONTEND_URL")
 def reset_password():
     try:
         password = request.json.get("password", None)
