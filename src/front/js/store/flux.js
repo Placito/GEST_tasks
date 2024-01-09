@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			token: null
+			token: null,
+			users: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -59,6 +60,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				setStore({token: null});
+			},
+			getUsers: () => {
+				fetch('https://randomuser.me/api'. {
+						method: 'Post',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							name: 'User 1'
+						})
+					})
+					.then(res => {
+						return res.json()
+					})
+					.then(data => 
+						console.log(data),
+						setStore({ users: data.results })
+						)
+					.catch(error => console.log(error))
 			},
 			changeColor: (index, color) => {
 				//get the store
