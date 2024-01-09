@@ -62,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({token: null});
 			},
 			getUsers: () => {
-				fetch('https://randomuser.me/api'. {
+				fetch('https://randomuser.me/api', {
 						method: 'Post',
 						headers: {
 							'Content-Type': 'application/json'
