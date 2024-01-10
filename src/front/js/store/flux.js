@@ -62,20 +62,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({token: null});
 			},
 			getUsers: () => {
-				fetch('https://randomuser.me/api', {
-						method: 'Post',
+				fetch('https://randomuser.me/api/', {
+						method: 'get',
 						headers: {
 							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							name: 'User 1'
-						})
+						}
 					})
 					.then(res => {
+						console.log(res)
 						return res.json()
 					})
 					.then(data => 
-						console.log(data),
 						setStore({ users: data.results })
 						)
 					.catch(error => console.log(error))

@@ -18,7 +18,7 @@ export const Table_u = () => {
 	const removeTodo = (currentIndex) => {
 		setList((list.filter((element) => element !== currentIndex)));
 
-		fetch(`https://jsonplaceholder.typicode.com/todos/${currentIndex}`, {
+		fetch(`https://randomuser.me/api/${currentIndex}`, {
 			method: 'DELETE',
 			headers:{
 				'Content-Type': 'application/json'
