@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "../../styles/login.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../store/appContext";
 import { useUser } from "../component/userContext";
 
-export const Login = () => {
-	const { store } = useContext(Context);
+export function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
@@ -16,8 +14,8 @@ export const Login = () => {
 	const [message, setMessage] = useState("Wrong credential");
 	const { setIsLoggedIn } = useUser(false);
 
-	const handleClick = () => {
-	async function login(username, password) {
+	async function login(event) {
+		event.preventDefault();
 		let flag = true;
 		if (username === "") {
 		  flag = false;
@@ -31,47 +29,45 @@ export const Login = () => {
 		  setMessage("Wrong credential");
 		  return;
 		}
-		const payload = {
-		  username: username,
-		  password: password,
-		};
-		try {
-		  const response = await axios.post(process.env.BACKEND_URL + "/api/token", payload);
-		  console.log(response);
-	
-		  if (response.data.success === "true") {
-			// Store access token in local storage
-			localStorage.setItem('access_token', response.data.access_token);
-			//console.log("Login successful");
-			console.log("Stored Token: ", localStorage.getItem('access_token'));
-			//console.log(localStorage.getItem('access_token'));
-	
-			console.log("Navigating ..."); // to check if Navigation function is called
-	
-			if (localStorage.getItem('access_token')) {
-			  setIsLoggedIn(true);
-			  navigate("/details_Sectors");
-	
+			const payload = {
+			username: username,
+			password: password,
+			};
+			try {
+			const response = await axios.post(process.env.BACKEND_URL + "/api/token", payload);
+			console.log(response);
+		
+			if (response.data.success === "true") {
+				// Store access token in local storage
+				localStorage.setItem('access_token', response.data.access_token);
+				//console.log("Login successful");
+				console.log("Stored Token: ", localStorage.getItem('access_token'));
+				//console.log(localStorage.getItem('access_token'));
+		
+				console.log("Navigating ..."); // to check if Navigation function is called
+		
+				if (localStorage.getItem('access_token')) {
+				setIsLoggedIn(true);
+				navigate("/details_Sectors");
+		
+				} else {
+				console.log("Token not set");
+				}
 			} else {
-			  console.log("Token not set");
+				setAPIFlag(true);
+				setMessage(response.data.msg);
+				console.log("Login failed");
 			}
-		  } else {
-			setAPIFlag(true);
-			setMessage(response.data.msg);
-			console.log("Login failed");
-		  }
-		} catch (error) {
-		  if (error.response) {
-			console.log(error.response);
-		  }
+			} catch (error) {
+			if (error.response) {
+				console.log(error.response);
+			}
+			}
 		}
-	  }
-	}
 
 	return (
 		<div className="container">
 			<h4 className="text-login">Login to your account:</h4>
-			{store.token && store.token != "" && store.token != undefined ? navigate.push("/details_Sectors") :  
 			<div >
 			  <br />
 			  <div className="form-outline mb-4">
@@ -123,16 +119,18 @@ export const Login = () => {
 			  <br/>
 			  <br/>
 			  <br/>
+			  {usernameFlag || apiFlag || passwordFlag ? (
+                  <p className="text-danger">{message}</p>
+                ) : null}
 			  <div className="text-center">
 				<button
 				  className="btn-login"
-				  onClick={handleClick}
+				  onClick={login}
 				>
 				  Login
 				</button>
 			  </div>
 			</div>
-			}
 		  </div>
 	);
-};
+}
