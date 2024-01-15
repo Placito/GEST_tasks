@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import logo from "../../img/logo.png";
 import "../../styles/resetPassword.css";
 
 export const ResetPassword = () => {
@@ -37,7 +36,7 @@ export const ResetPassword = () => {
             <h1 className="reset-title">Reset account password</h1>
           </div>
           <br />
-          <div>
+          <div className="reset-box">
             <div>
               <p className="paragraf">Forgot your password? Enter your email.</p>
               <p className="paragraf">
