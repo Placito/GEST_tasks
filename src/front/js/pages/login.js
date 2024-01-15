@@ -1,16 +1,71 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/login.css";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useUser } from "../component/userContext";
 
 export const Login = () => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
+	const [usernameFlag, setUsernameFlag] = useState(false);
+	const [passwordFlag, setPasswordFlag] = useState(false);
+	const [apiFlag, setAPIFlag] = useState(false);
+	const [message, setMessage] = useState("Wrong credential");
+	const { setIsLoggedIn } = useUser(false);
 
 	const handleClick = () => {
-		actions.login(username, password)
+	async function login(username, password) {
+		let flag = true;
+		if (username === "") {
+		  flag = false;
+		  setUsernameFlag(true);
+		}
+		if (password === "") {
+		  flag = false;
+		  setPasswordFlag(true);
+		}
+		if (!flag) {
+		  setMessage("Wrong credential");
+		  return;
+		}
+		const payload = {
+		  username: username,
+		  password: password,
+		};
+		try {
+		  const response = await axios.post(process.env.BACKEND_URL + "/api/token", payload);
+		  console.log(response);
+	
+		  if (response.data.success === "true") {
+			// Store access token in local storage
+			localStorage.setItem('access_token', response.data.access_token);
+			//console.log("Login successful");
+			console.log("Stored Token: ", localStorage.getItem('access_token'));
+			//console.log(localStorage.getItem('access_token'));
+	
+			console.log("Navigating ..."); // to check if Navigation function is called
+	
+			if (localStorage.getItem('access_token')) {
+			  setIsLoggedIn(true);
+			  navigate("/details_Sectors");
+	
+			} else {
+			  console.log("Token not set");
+			}
+		  } else {
+			setAPIFlag(true);
+			setMessage(response.data.msg);
+			console.log("Login failed");
+		  }
+		} catch (error) {
+		  if (error.response) {
+			console.log(error.response);
+		  }
+		}
+	  }
 	}
 
 	return (

@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { json } from 'react-router-dom';
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -27,36 +30,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const token = sessionStorage.getItem("token");
 				if (token && token != "" && token != undefined) setStore({token: token});
 			},
-			login: async (username, password) => {
-				const opts = {
-					method: 'POST',
-					headers: {
-						"content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						"username": username,
-						"passsword": password
-					})
+			/*login: async function login(username, password) {
+				let flag = true;
+				if (username === "") {
+				  flag = false;
+				  setEmailFlag(true);
 				}
-				console.log(opts)
+				if (password === "") {
+				  flag = false;
+				  setPasswordFlag(true);
+				}
+				if (!flag) {
+				  setMessage("Wrong credential");
+				  return;
+				}
+				const payload = {
+				  username: username,
+				  password: password,
+				};
 				try {
-					const resp = await fetch('https://glorious-space-succotash-7jxpv6jj6xw2pp6j-3001.app.github.dev/api/token', opts)
-					if(resp.status !== 200) {
-						console.log(resp)
-						alert("There has been some error");
-						return false;
+				  const response = await axios.post(process.env.BACKEND_URL + "/api/token", payload);
+				  console.log(response);
+			
+				  if (response.data.success === "true") {
+					// Store access token in local storage
+					localStorage.setItem('access_token', response.data.access_token);
+					//console.log("Login successful");
+					console.log("Stored Token: ", localStorage.getItem('access_token'));
+					//console.log(localStorage.getItem('access_token'));
+			
+					console.log("Navigating to profile"); // to check if Navigation function is called
+			
+					if (localStorage.getItem('access_token')) {
+					  setIsLoggedIn(true);
+					  navigate("/profile");
+			
+					} else {
+					  console.log("Token not set");
+					}
+				  } else {
+					setAPIFlag(true);
+					setMessage(response.data.msg);
+					console.log("Login failed");
+				  }
+				} catch (error) {
+				  if (error.response) {
+					console.log(error.response);
+				  }
 				}
-					const data = await resp.jon();
-					console.log("This came from the backend", data);
-					sessionStorage.setItem("token", data.access_token);
-					setStore({token: data.access_token})
-					return true;
-				}
-				catch(error){
-					console.error("There has been an error!");
-				}
-				
-			},
+			  },*/
 			logout: () => {
 				sessionStorage.removeItem("token");
 				setStore({token: null});
