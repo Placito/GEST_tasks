@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/table.css";
 
-export const Table_u = () => {
+export const Table_u = (props) => {
 	const { store, actions } = useContext(Context);
 	const [newTask, setNewTask] = useState("");
 	const [task, setTask] = useState(["Make the bed", "Wash my hands"]);
@@ -58,7 +58,7 @@ export const Table_u = () => {
 						<td>Jacob</td>
 						<td>Thornton</td>
 						<td>@fat</td>
-						<td><i className="fa-solid fa-trash-can"></i></td>
+						<td><i className="fa-solid fa-trash-can" onClick={ () => removeTodo()}></i></td>
 						</tr>
 					</tbody>
 				</table>
