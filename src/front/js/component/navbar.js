@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,12 +6,15 @@ import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
 import LogoutComponent from "../component/logout";
 import { useUser } from "../component/userContext";
+import SelectedTypeContext from "../TypeContext";
 
 export const Navbar = (token) => {
 	const { store, actions } = useContext(Context);
+	const [showAutocomplete, setShowAutocomplete] = useState(false);
+  	const { setSelectedType } = useContext(SelectedTypeContext);
+  	const { isLoggedIn, setIsLoggedIn } = useUser(false);
 	const params = useParams();
  	const navigate = useNavigate();
-  	const { setIsLoggedIn } = useUser();
 
 	  useEffect(() => {
 		const token = localStorage.getItem('access_token');
@@ -53,7 +56,7 @@ export const Navbar = (token) => {
 					</Link>
 					<p className="task-paragraf">Task managemnet software</p>
 				</div>
-				{ store.token ?
+				{ isLoggedIn ?
 				<LogoutComponent onLogout={() => {
 					actions.logout();
 					setIsLoggedIn(false)

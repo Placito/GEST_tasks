@@ -19,15 +19,15 @@ cors = CORS(api, resources={r"/api/*": {"origins": "*"}})
 @api.route('/login', methods=['POST'])
 @cross_origin()
 def login_post():
-    email = request.json.get('email')
+    username = request.json.get('username')
     password = request.json.get('password')
 
     # Debugging: Print received email and password
-    print(f"Received email: {email}")
+    print(f"Received email: {username}")
     print(f"Received password: {password}")
 
     # Find the user in the database
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(username=username).first()
 
     if user:
         # Debugging: Print stored password hash
