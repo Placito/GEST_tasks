@@ -79,9 +79,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  }
 				}
 			  },*/
-			logout: () => {
-				sessionStorage.removeItem("token");
-				setStore({token: null});
+			  logout: () => {
+				axios.post('/logout')
+					.then(response => {
+						if (response.data.success === 'true') {
+							console.log("Logout successful");
+						} else {
+							console.error('Logout failed:', response.data.msg);
+						}
+					})
+				localStorage.removeItem('access_token'); // Always remove token
+
 			},
 			getUsers: () => {
 				fetch('https://randomuser.me/api/', {

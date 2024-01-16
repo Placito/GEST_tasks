@@ -1,14 +1,13 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS, cross_origin
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
-from flask import session
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
+                               unset_jwt_cookies, jwt_required, JWTManager
 
 api = Blueprint('api', __name__)
 
@@ -51,3 +50,9 @@ def login_post():
         print("User not found")
         return {"success": "false", "msg": "User not found"}
 
+@api.route("/logout", methods=["POST"])
+def logout():
+    print("Logout route hit")
+    response = jsonify({"success":'true',"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response

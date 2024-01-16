@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/login.css";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../component/userContext";
 
 export function Login() {
@@ -106,13 +106,6 @@ export function Login() {
 						Remember password{" "}
 					  </label>
 				</div>
-				<Link
-				  className="forgot-link link col-6"
-				  to="/resetPassword"
-				  type="submit"
-				>
-				  Forgot Password?
-				</Link>
 			  </div>
 			  </div>
 			  <br/>
