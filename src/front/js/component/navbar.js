@@ -6,12 +6,9 @@ import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
 import LogoutComponent from "../component/logout";
 import { useUser } from "../component/userContext";
-import SelectedTypeContext from "../TypeContext";
 
 export const Navbar = (token) => {
 	const { store, actions } = useContext(Context);
-	const [showAutocomplete, setShowAutocomplete] = useState(false);
-  	const { setSelectedType } = useContext(SelectedTypeContext);
   	const { isLoggedIn, setIsLoggedIn } = useUser(false);
 	const params = useParams();
  	const navigate = useNavigate();

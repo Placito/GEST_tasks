@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../../styles/login.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../component/userContext";
+import SelectedTypeContext from "../TypeContext";
 
 export function Login() {
 	const [username, setUsername] = useState("");
@@ -13,6 +14,7 @@ export function Login() {
 	const [apiFlag, setAPIFlag] = useState(false);
 	const [message, setMessage] = useState("Wrong credential");
 	const { setIsLoggedIn } = useUser(false);
+	const { setSelectedType } = useContext(SelectedTypeContext);
 
 	async function login(event) {
 		event.preventDefault();
@@ -114,15 +116,18 @@ export function Login() {
 			  <br/>
 			  {usernameFlag || apiFlag || passwordFlag ? (
                   <p className="text-danger">{message}</p>
-                ) : null}
-			  <div className="text-center">
-				<button
-				  className="btn-login"
-				  onClick={login}
-				>
-				  Login
-				</button>
-			  </div>
+                ) : null
+			  }
+				<Link to={`/details_Sectors/${setSelectedType()}`}>
+					<div className="text-center">
+						<button
+						className="btn-login"
+						onClick={login}
+						>
+						Login
+						</button>
+					</div>
+				</Link>
 			</div>
 		  </div>
 	);
