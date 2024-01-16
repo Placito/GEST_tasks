@@ -16,7 +16,7 @@ cors = CORS(api, resources={r"/api/*": {"origins": "*"}})
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
-@api.route('/api/token', methods=['POST'])
+@api.route('/login', methods=['POST'])
 @cross_origin()
 def login_post():
     email = request.json.get('email')

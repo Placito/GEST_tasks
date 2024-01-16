@@ -34,7 +34,7 @@ export function Login() {
 			password: password,
 			};
 			try {
-			const response = await axios.post(process.env.BACKEND_URL + "/api/token", payload);
+			const response = await axios.post(process.env.BACKEND_URL + "/login", payload);
 			console.log(response);
 		
 			if (response.data.success === "true") {
