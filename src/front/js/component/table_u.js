@@ -1,21 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/table.css";
+import { useParams } from "react-router-dom";
 
 export const Table_u = (props) => {
 	const { store, actions } = useContext(Context);
-	const [newTask, setNewTask] = useState("");
-	const [task, setTask] = useState(["Make the bed", "Wash my hands"]);
+	const params = useParams();
+	const [user, setUser] = useState({
+		username: "",
+		namel: "",
+		role: "",
+        password: ""
+	});
 
-	// Get the value of a input when press the key Enter
-	const handleKeyDown = event => {
-		if (event.key === 'Enter') {
-			setTask(task.concat(newTask)) 
-			setNewTask("");
-		}}
+	useEffect(() => {
+		if (params.id) {
+			actions.getUsersById(params.id);
+		}}, []);
 	
-	//function for removing the element when the task is done
-	const removeTodo = (currentIndex) => {
+	//function for removing a user
+	const removeUser = (currentIndex) => {
 		setList((list.filter((element) => element !== currentIndex)));
 
 		fetch(`https://randomuser.me/api/${currentIndex}`, {
@@ -32,10 +36,9 @@ export const Table_u = (props) => {
 		.catch(error => console.error(error));
 	}
 
-
 	return (
 		<div className="container mt-5">
-				<table className="table table-hover table-box" onKeyDown={handleKeyDown} onChange={e => setNewTask(e.target.value)} value={newTask} id="add-task">
+				<table className="table table-hover table-box" onKeyDown={handleKeyDown} onChange={e => setUser(e.target.value)} value={user} id="add-task">
 					<thead className="header-table">
 						<tr>
 						<th scope="col">Id's user</th>
@@ -58,7 +61,7 @@ export const Table_u = (props) => {
 						<td>Jacob</td>
 						<td>Thornton</td>
 						<td>@fat</td>
-						<td><i className="fa-solid fa-trash-can" onClick={ () => removeTodo()}></i></td>
+						<td><i className="fa-solid fa-trash-can" onClick={ () => removeUser()}></i></td>
 						</tr>
 					</tbody>
 				</table>

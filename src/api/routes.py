@@ -22,8 +22,8 @@ def login_post():
     username = request.json.get('username')
     password = request.json.get('password')
 
-    # Debugging: Print received email and password
-    print(f"Received email: {username}")
+    # Debugging: Print received username and password
+    print(f"Received username: {username}")
     print(f"Received password: {password}")
 
     # Find the user in the database
