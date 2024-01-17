@@ -16,7 +16,7 @@ export const Table_users = (props) => {
 	console.log(store.users)
 	return (
 		<div className="container mt-5">
-			<h1>Users:</h1>
+			<h1>Consult users:</h1>
 				{store.users.map((user, index) => (
 				<Table_u
 					key ={index}
