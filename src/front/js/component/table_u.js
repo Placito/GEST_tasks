@@ -64,10 +64,11 @@ export const Table_u = (props) => {
 				<table className="table table-hover table-box" onKeyDown={handleKeyDown} onChange={e => setUser(e.target.value)} value={user} id="add-task">
 					<thead className="header-table">
 						<tr>
-						<th scope="col">Id's user</th>
-						<th scope="col">Username</th>
+						<th scope="col">Id</th>
 						<th scope="col">Name</th>
 						<th scope="col">Role</th>
+						<th scope="col">Username</th>
+						<th scope="col">Password</th>
 						<th scope="col">Delete</th>
 						<th scope="col">Edit</th>
 						</tr>
@@ -75,12 +76,13 @@ export const Table_u = (props) => {
 					<tbody>
 						<tr>
 						<th scope="row">{props.contact.index}</th>
-						<td>{props.contact.login.username}</td>
 						<td>{props.contact.name.first}</td>
+						<td>{props.contact.login.salt}</td>
+						<td>{props.contact.login.username}</td>
 						<td>{props.contact.login.password}</td>
 						<td><i className="fa-solid fa-trash-can icon" onClick={() => props.removeUser()}></i></td>
 						<td>
-							<Link to={"/editContact/" + props.index}><i className="fa-solid fa-pen-to-square icon"></i></Link>
+							<Link to={"/editUser/" + props.contact.index}><i className="fa-solid fa-pen-to-square icon"></i></Link>
 						</td>
 						</tr>
 					</tbody>

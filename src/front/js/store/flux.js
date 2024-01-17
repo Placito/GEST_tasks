@@ -53,17 +53,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						)
 					.catch(error => console.log(error))
 			},
-			getUsersById: (id, setCharacter) => {
-				fetch(`https://randomuser.me/api/${id}`)
-				.then(res => {
-					if (!res.ok) throw Error(res.statusText);
-					return res.json();
-				})
-				.then(response => {
-					setCharacter(response.result);
-				})
-				.catch(error => console.error(error));
-			},
 			//function to add a new contact
 			addUser: (newUser) => {
 				//get the store

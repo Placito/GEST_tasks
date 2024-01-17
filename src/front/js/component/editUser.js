@@ -6,9 +6,9 @@ export const EditUser = () => {
     const { store, actions } = useContext(Context);
     const params = useParams(); 
 	const [user, setUser] = useState({
+        name: "",
+        role: "",
 		username: "",
-		name: "",
-		role: "",
         password: ""
 	});
 	
@@ -30,16 +30,16 @@ export const EditUser = () => {
             <h1>Edit Contact:</h1>
 			<form onChange={(e) =>  onChangeForm(e)} onSubmit={(e) => e.preventDefault()}>
                 <div className="mb-3 row">
-                    <input type="text" className="form-control" id="username" placeholder="Enter username" />
+                    <input type="text" className="form-control" id="username" defaultValue={store.users.name} />
                 </div>
                 <div className="mb-3 row">
-                    <input type="name" className="form-control" id="name" placeholder="Enter name" />
+                    <input type="name" className="form-control" id="name" defaultValue={store.users.role} />
                 </div>
                 <div className="mb-3 row">
-                    <input type="text"  className="form-control" id="role" placeholder="Enter role" />
+                    <input type="text"  className="form-control" id="role" defaultValue={store.users.role} />
                 </div>
                 <div className="mb-3 row">
-                    <input type="text" className="form-control" id="password" placeholder="Enter password" />
+                    <input type="text" className="form-control" id="password" defaultValue={store.users.password} />
                 </div>
                 <Link className="link-user" to="/table_users">
                     <div className="row"> 

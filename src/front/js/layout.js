@@ -44,7 +44,7 @@ const Layout = () => {
                         <Route element={<Table_sectors />} path="/table_sectors" />
                         <Route element={<Table_users />} path="/table_users" />
                         <Route element={<AddUser />} path="/addUser" />
-                        <Route element={<EditUser />} path="/editUser" />
+                        <Route path="/editUser/:index" element={<EditUser />} />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>
