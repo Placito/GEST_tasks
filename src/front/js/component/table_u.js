@@ -74,14 +74,14 @@ export const Table_u = (props) => {
 					</thead>
 					<tbody>
 						<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-						<td><i className="fa-solid fa-trash-can" onClick={ () => removeUser()}></i></td>
-						<Link to="/editUser">
-							<td><i className="fa-solid fa-pen-to-square"></i></td>
-						</Link>
+						<th scope="row">{props.contact.index}</th>
+						<td>{props.contact.login.username}</td>
+						<td>{props.contact.name.first}</td>
+						<td>{props.contact.login.password}</td>
+						<td><i className="fa-solid fa-trash-can icon" onClick={() => props.removeUser()}></i></td>
+						<td>
+							<Link to={"/editContact/" + props.index}><i className="fa-solid fa-pen-to-square icon"></i></Link>
+						</td>
 						</tr>
 					</tbody>
 				</table>

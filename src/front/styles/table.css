@@ -6,6 +6,11 @@
     color: white;
     background-color: #1B3255;
 }
+.icon {
+    color: black;
+    text-decoration: inherit;
+    justify-items: center;
+}
 .btn-user {
     color: white;
     background-color: #1B3255;
