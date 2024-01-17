@@ -21,7 +21,7 @@ export const Table_u = (props) => {
 	
 	//function for removing a user
 	const removeUser = (currentIndex) => {
-		setList((list.filter((element) => element !== currentIndex)));
+		setUser((actions.users.filter((element) => element !== currentIndex)));
 
 		fetch(`https://randomuser.me/api/${currentIndex}`, {
 			method: 'DELETE',
@@ -74,19 +74,14 @@ export const Table_u = (props) => {
 					</thead>
 					<tbody>
 						<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-						<td><i className="fa-solid fa-trash-can"></i></td>
-						</tr>
-						<tr>
 						<th scope="row">2</th>
 						<td>Jacob</td>
 						<td>Thornton</td>
 						<td>@fat</td>
 						<td><i className="fa-solid fa-trash-can" onClick={ () => removeUser()}></i></td>
-						<td><i className="fa-solid fa-pen-to-square" onClick={ () => actions.updateUser()}></i></td>
+						<Link to="/editUser">
+							<td><i className="fa-solid fa-pen-to-square"></i></td>
+						</Link>
 						</tr>
 					</tbody>
 				</table>

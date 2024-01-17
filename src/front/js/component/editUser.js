@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const EditContact = () => {
+export const EditUser = () => {
     const { store, actions } = useContext(Context);
     const params = useParams(); 
 	const [user, setUser] = useState({
@@ -43,7 +43,7 @@ export const EditContact = () => {
                 </div>
                 <Link className="link-user" to="/table_users">
                     <div className="row"> 
-                        <button type="submit" onClick={() => actions.updateUser(user)} className="btn-user" >Edit</button>
+                        <button type="submit" onClick={() => actions.update(user)} className="btn-user" >Edit</button>
                     </div>
                 </Link>
                 <br /> 
