@@ -68,12 +68,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addUser: (newUser) => {
 				//get the store
 				const store = getStore();
-				const newUser = store.users.concat(newUser);
+				const newUsers = store.users.concat(newUser);
 			
 				//a fetch to update the user with the new user
 				fetch('https://randomuser.me/api/', {
 					method: 'POST',
-					body: JSON.stringify(newUser),
+					body: JSON.stringify(newUsers),
 					headers:{
 						'Content-Type': 'application/json'
 					}
@@ -86,13 +86,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(error => console.error(error));
 
 				//reset the global store
-				setStore({ users: newUser });
+				setStore({ users: newUsers });
 			},
 			//function that allows to update users
 			update: (index, user) => {
 				const store = getStore();
 			console.log(index, user)
-				const contact = store.users.map((c, i) => {
+				const updateUser = store.users.map((c, i) => {
 					if (index == i) {
 						c = user
 					}
@@ -100,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 
 			console.log("test", user)
-				setStore({ users: user });
+				setStore({ users: updateUser });
 			},
 			changeColor: (index, color) => {
 				//get the store

@@ -6,3 +6,16 @@
     color: white;
     background-color: #1B3255;
 }
+.btn-user {
+    color: white;
+    background-color: #1B3255;
+    border-radius: 6px;
+}
+.link-user {
+    color: #1B3255;
+    text-decoration: inherit;
+}
+.link-user:hover {
+    color: #056FAA;
+    font-weight: 500;
+}
