@@ -16,9 +16,18 @@ export const Table_users = (props) => {
 	return (
 		<div className="container mt-5">
 			<h1>Consult users:</h1>
-			{store.users.map(item => (
-				<Table_u text={item} onClick={ () => props.removeTodo()} />
-				))}
+				{store.users.map((user, index) => (
+				<Table_u
+					key ={index}
+					index={index}
+					contact={user}
+					update={actions.update}
+					delete={() => {
+						onclick=({ removeUser: index })					
+					}}
+					/>
+			))}
+			<br />
 		</div>
 	);
 };
