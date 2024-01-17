@@ -118,7 +118,7 @@ export function Login() {
                   <p className="text-danger">{message}</p>
                 ) : null
 			  }
-				<Link to={`/details_Sectors/${setSelectedType()}`}>
+				<Link to={`/details_Sectors`}>
 					<div className="text-center">
 						<button
 						className="btn-login"
