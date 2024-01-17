@@ -69,6 +69,7 @@ export const Table_u = (props) => {
 						<th scope="col">Name</th>
 						<th scope="col">Role</th>
 						<th scope="col">Delete</th>
+						<th scope="col">Edit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -85,6 +86,7 @@ export const Table_u = (props) => {
 						<td>Thornton</td>
 						<td>@fat</td>
 						<td><i className="fa-solid fa-trash-can" onClick={ () => removeUser()}></i></td>
+						<td><i className="fa-solid fa-pen-to-square" onClick={ () => actions.updateUser()}></i></td>
 						</tr>
 					</tbody>
 				</table>
