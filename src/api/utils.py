@@ -36,19 +36,13 @@ def generate_sitemap(app):
     <style>
         body {
             background-color: #7D8087;
-        }
-        .navbar-box {
-            background-color: #1B3255;
-        }
-        .task-paragraf {
-            color: #056FAA;
-            font-weight: 400;
-            font-size: 30px;
-            margin-top: auto;
+            margin: 0px; 
+            padding:0px;
         }
     </style>
-        <div style="text-align: center;">
-        <nav className="navbar navbar-expand-lg navbar-box">
+    <body>
+        <nav style="background-color: #1B3255; color: #056FAA; font-weight: 400; font-size: 30px;">
             <h1>Welcome to your dasboard!!</h1>
+            <ul style="text-align: left;">"""+links_html+"""</ul>
         </nav>
-        <ul style="text-align: left;">"""+links_html+"</ul></div>"
+    </body>"""
