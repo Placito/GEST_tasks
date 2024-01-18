@@ -35,7 +35,7 @@ def create_user():
     hashed_password = generate_password_hash(password, method="sha256")
 
     # Create a new user object
-    new_user = User(username=username, password=hashed_password, username=username)
+    new_user = User(username=username, password=hashed_password, name=name, role=role)
 
     # Save the new user object to the database
     db.session.add(new_user)
