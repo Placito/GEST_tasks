@@ -6,6 +6,8 @@ from flask_admin.contrib.sqla import ModelView
 def setup_admin(app):
     app.secret_key = os.environ.get('FLASK_APP_KEY', 'sample key')
     app.config['FLASK_ADMIN_SWATCH'] = 'darkly'
+    # Include my custom CSS file
+    app.config['FLASK_ADMIN_CSS'] = 'path/to/custom_admin_styles.css'
     admin = Admin(app, name='GEST Admin', template_mode='bootstrap3')
     
     # Add User model to the admin
