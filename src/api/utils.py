@@ -33,7 +33,22 @@ def generate_sitemap(app):
     links_html = "".join(["<li><a href='" + y + "'>" + y + "</a></li>" for y in links])
 
     return """
-        <div style="text-align: center; background-color: #7D8087;">
-        <img style="max-height: 80px" src='https://www.kendomanager.com/wp-content/uploads/2019/02/Free-startup-task-management.png' />
-        <h1>Welcome to your dasboard!!</h1>
+    <style>
+        body {
+            background-color: #7D8087;
+        }
+        .navbar-box {
+            background-color: #1B3255;
+        }
+        .task-paragraf {
+            color: #056FAA;
+            font-weight: 400;
+            font-size: 30px;
+            margin-top: auto;
+        }
+    </style>
+        <div style="text-align: center;">
+        <nav className="navbar navbar-expand-lg navbar-box">
+            <h1>Welcome to your dasboard!!</h1>
+        </nav>
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
