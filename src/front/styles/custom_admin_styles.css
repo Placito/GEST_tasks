@@ -1,6 +1,6 @@
 /* custom_admin_styles.css */
 body {
-    background-color: blueviolet;
+    background-color: hsl(180, 2%, 20%)
 }
 .flask-admin .container {
     margin: 0px; 

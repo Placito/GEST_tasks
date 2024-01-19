@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin from GEST{% endblock %}</title>
+
+    <!-- Include common stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='front/styles/custom_admin_template.css') }}">
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Include common header content -->
+        <h1>Welcome to your dasboard!!</h1>
+        <nav>
+            <ul>
+                <body>
+                    <nav style="background-color: #1B3255; color: #056FAA; font-weight: 400; font-size: 30px;">
+                        <ul style="text-align: left;">"""+links_html+"""</ul>
+                    </nav>
+                </body>"""
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Content from child templates will go here -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <!-- Include common footer content -->
+        <p>&copy; 2024 GESP</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

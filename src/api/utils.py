@@ -45,4 +45,5 @@ def generate_sitemap(app):
             <h1>Welcome to your dasboard!!</h1>
             <ul style="text-align: left;">"""+links_html+"""</ul>
         </nav>
+        
     </body>"""

@@ -10,7 +10,7 @@ def setup_admin(app):
     # Include my custom CSS file
     app.config['FLASK_ADMIN_CSS'] = 'front/styles/custom_admin_styles.css'  
     
-    admin = Admin(app, name='GEST Admin', template_mode='bootstrap3', base_template='admin_layout.html')
+    admin = Admin(app, name='GEST Admin', template_mode='bootstrap3')
 
     # Add User model to the admin with an icon
     admin.add_view(ModelView(User, db.session))
