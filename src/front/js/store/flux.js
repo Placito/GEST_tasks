@@ -76,6 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					if (resp.status === 201) {
 						console.log("User created successfully", data);
+						setStore({ users: data })
 						return true;
 					} else {
 						alert(`Error: ${data.message}`);

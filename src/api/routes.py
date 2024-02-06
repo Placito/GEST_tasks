@@ -31,13 +31,22 @@ def login_post():
 
     if user:
         if check_password_hash(user.password, password):
-            access_token = create_access_token(identity=user.id)
-            return {"success": "true", "access_token": access_token}
+            # Get the user's role
+            role = user.role
+            
+            # Ensure the role is valid
+            if role not in ROLES:
+                return {"success": "false", "msg": "Invalid role assigned to the user"}
+
+            # Create access token with user's ID and role
+            access_token = create_access_token(identity=user.id, additional_claims={"role": role})
+            
+            return {"success": "true", "access_token": access_token, "role": role}
         else:
             return {"success": "false", "msg": "Wrong credentials"}
     else:
         return {"success": "false", "msg": "User not found"}
-
+    
 # Create a route to log out users
 @api.route("/logout", methods=["POST"])
 @cross_origin()

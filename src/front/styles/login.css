@@ -43,10 +43,13 @@
       font-weight: 700;
     }
     .login-message {
-      color: #1B3255;
+      margin: auto;
+      color: #d1d1d1;
       background-color: rgb(116, 10, 10);
       box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
       border-radius: 6px;
+      padding: 0 10px;
+      width: fit-content;
 
     }
     /*css to make the site responsive*/
