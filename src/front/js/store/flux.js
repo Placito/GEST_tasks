@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error))
 			},
 			//function to add a new contact
-			addUser: async (username,  name, role, password) => {
+			addUser: async (username, name, role, password) => {
 				const opts = {
 					method: "POST",
 					headers: {

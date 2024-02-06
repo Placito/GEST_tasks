@@ -3,7 +3,6 @@ from flask import request, jsonify, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS, cross_origin
-from functools import wraps
 from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required, JWTManager
 
 api = Blueprint('api', __name__)

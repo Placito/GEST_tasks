@@ -4,20 +4,12 @@ import { Context } from "../store/appContext";
 import "../../styles/table.css";
 
 export const AddUser = () => {
-    const { actions } = useContext(Context);
-	const [user, setUser] = useState({
-		username: "",
-		name: "",
-		role: "",
-        password: ""
-	});
+    const { store, actions } = useContext(Context);
 
     //function to change the value from on an specific id of an input an assing it to a new object
     function onChangeForm(e) {
         const { id, value } = e.target;
         console.log({id, value});
-        setUser({...user, [id]: value });
-        console.log({...user, [id]: value })
     }
 
 	return (
@@ -38,7 +30,7 @@ export const AddUser = () => {
                 </div>
                 <Link className="link-user" to="/table_users">
                     <div className="row"> 
-                        <button type="submit" onClick={() => actions.addUser(user)} className="btn-user" >Save</button>
+                        <button type="submit" onClick={() => actions.addUser(store.users)} className="btn-user" >Save</button>
                     </div>
                 </Link>
                 <br /> 
