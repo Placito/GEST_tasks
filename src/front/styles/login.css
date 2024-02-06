@@ -42,6 +42,13 @@
       color: #D9D9D9;
       font-weight: 700;
     }
+    .login-message {
+      color: #1B3255;
+      background-color: rgb(116, 10, 10);
+      box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
+      border-radius: 6px;
+
+    }
     /*css to make the site responsive*/
   @media screen and (max-width: 1000px) {
     .text-login {
