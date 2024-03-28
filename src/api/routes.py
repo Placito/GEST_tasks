@@ -1,16 +1,14 @@
+from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import request, jsonify, Blueprint
+from flask_login import login_user, login_required, logout_user, current_user
+from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required
 from api.models import db, User
-from api.utils import generate_sitemap, APIException
 from flask_cors import CORS, cross_origin
-from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required, JWTManager
 
 api = Blueprint('api', __name__)
+CORS(api, resources={r"/api/*": {"origins": "*"}})
 
-# Allow CORS requests to this API
-cors = CORS(api, resources={r"/api/*": {"origins": "*"}})
-
-# Define roles 
+# Roles dictionary
 ROLES = {
     'director': ['director'],
     'administrative': ['administrative'],
@@ -19,73 +17,48 @@ ROLES = {
     'quality': ['quality'],
 }
 
-# Create a route to authenticate your users and return JWTs.
+# Login route
 @api.route('/login', methods=['POST'])
 @cross_origin()
 def login_post():
-    username = request.json.get('username')
-    password = request.json.get('password')
-
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
     user = User.query.filter_by(username=username).first()
 
-    if user:
-        if check_password_hash(user.password, password):
-            # Get the user's role
-            role = user.role
-            
-            # Ensure the role is valid
-            if role not in ROLES:
-                return {"success": "false", "msg": "Invalid role assigned to the user"}
-
-            # Create access token with user's ID and role
-            access_token = create_access_token(identity=user.id, additional_claims={"role": role})
-            
-            return {"success": "true", "access_token": access_token, "role": role}
-        else:
-            return {"success": "false", "msg": "Wrong credentials"}
+    if user and check_password_hash(user.password, password):
+        role = user.role
+        if role not in ROLES:
+            return {"success": "false", "msg": "Invalid role assigned to the user"}, 400
+        access_token = create_access_token(identity=user.id, additional_claims={"role": role})
+        return {"success": "true", "access_token": access_token, "role": role}, 200
     else:
-        return {"success": "false", "msg": "User not found"}
-    
-# Create a route to log out users
-@api.route("/logout", methods=["POST"])
+        return {"success": "false", "msg": "Bad username or password"}, 401
+
+# Logout route
+@api.route('/logout', methods=['POST'])
+@login_required
 @cross_origin()
 def logout():
-    print("Logout route hit")
-    response = jsonify({"success": 'true', "msg": "logout successful"})
+    response = jsonify({"success": "true", "msg": "logout successful"})
     unset_jwt_cookies(response)
-    return response
+    return response, 200
 
+# User creation route
 @api.route('/create-user', methods=['POST'])
 @cross_origin()
 def create_user():
-    username = request.json.get('username')
-    name = request.json.get('name')
-    role = request.json.get('role')
-    password = request.json.get('password')
-    
-    # Debugging: print received password
-    print(f"Received password during signup: {password}")
+    username = request.json.get('username', None)
+    name = request.json.get('name', None)
+    role = request.json.get('role', None)
+    password = request.json.get('password', None)
 
-    # Check if user already exists
-    user = User.query.filter_by(username=username).first()
-    if user:
-        return {'success': 'false', 'msg': "user already exists"}
+    if User.query.filter_by(username=username).first():
+        return jsonify({'success': 'false', 'msg': "user already exists"}), 409
 
-    # Hash the password using PBKDF2 with SHA-256 and 20,000 iterations
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256:20000')
-    
-    # Debugging: print hashed password
-    print(f"Hashed password: {hashed_password}")
-
-    # Create the new user
     new_user = User(username=username, name=name, role=role, password=hashed_password)
-
-    # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
 
-    # Create access token
-    user = User.query.filter_by(username=username).first()
-    access_token = create_access_token(identity=user.id)
-
-    return {'success': 'true', "access_token": access_token}
+    access_token = create_access_token(identity=new_user.id)
+    return jsonify({'success': 'true', "access_token": access_token}), 201

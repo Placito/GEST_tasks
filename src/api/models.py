@@ -1,8 +1,21 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin, current_user
+from flask_admin.contrib.sqla import ModelView
+from flask import redirect, url_for, flash
+from flask_admin import expose
 
 db = SQLAlchemy()
 
-class User(db.Model):
+# ModelView to protect and define the rights of the users
+class Controller(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        flash('You are not authorized to use the admin dashboard', 'error')
+        return redirect(url_for('login'))  
+   
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), nullable=False)
