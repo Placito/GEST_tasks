@@ -265,3 +265,88 @@ def technician_sectores():
         abort(500)
     else:
         return jsonify(body)
+
+# route for operator, can view, edit and delete 
+@api.route('/operator/table_sectors', methods=['GET', 'PUT', 'DELETE'])
+@login_required.role('operator')
+def operator_sectores():
+    error = False
+    body = {}
+
+    try:
+        if request.method == 'GET':
+            # Fetch all sections
+            seccion_1 = [sec.serialize() for sec in Seccion_1.query.all()]
+            seccion_2 = [sec.serialize() for sec in Seccion_2.query.all()]
+            seccion_3 = [sec.serialize() for sec in Seccion_3.query.all()]
+            seccion_4 = [sec.serialize() for sec in Seccion_4.query.all()]
+            seccion_5 = [sec.serialize() for sec in Seccion_5.query.all()]
+            seccion_6 = [sec.serialize() for sec in Seccion_6.query.all()]
+
+            # Combine all sections into the response body
+            body['seccion_1'] = seccion_1
+            body['seccion_2'] = seccion_2
+            body['seccion_3'] = seccion_3
+            body['seccion_4'] = seccion_4
+            body['seccion_5'] = seccion_5
+            body['seccion_6'] = seccion_6
+
+        elif request.method == 'PUT':
+            # Update a specific sector (section)
+            data = request.get_json()
+            section_id = data.get('id')
+            section_table = data.get('section_table')
+
+            # Get the correct section table model
+            section_model = globals().get(section_table)
+
+            if section_model:
+                section = section_model.query.get(section_id)
+                if section:
+                    section.name = data.get('name', section.name)
+                    section.manufacturer = data.get('manufacturer', section.manufacturer)
+                    section.gender = data.get('gender', section.gender)
+                    section.type = data.get('type', section.type)
+                    section.price = data.get('price', section.price)
+                    db.session.commit()
+                    body['message'] = 'Section updated successfully.'
+                else:
+                    error = True
+                    body['message'] = 'Section not found.'
+            else:
+                error = True
+                body['message'] = 'Invalid section table.'
+
+        elif request.method == 'DELETE':
+            # Delete a specific sector (section)
+            data = request.get_json()
+            section_id = data.get('id')
+            section_table = data.get('section_table')
+
+            # Get the correct section table model
+            section_model = globals().get(section_table)
+
+            if section_model:
+                section = section_model.query.get(section_id)
+                if section:
+                    db.session.delete(section)
+                    db.session.commit()
+                    body['message'] = 'Section deleted successfully.'
+                else:
+                    error = True
+                    body['message'] = 'Section not found.'
+            else:
+                error = True
+                body['message'] = 'Invalid section table.'
+
+    except Exception as e:
+        db.session.rollback()
+        error = True
+        print(sys.exc_info())
+    finally:
+        db.session.close()
+
+    if error:
+        abort(500)
+    else:
+        return jsonify(body)
