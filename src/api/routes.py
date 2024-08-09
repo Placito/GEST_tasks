@@ -98,3 +98,85 @@ def director():
         abort(500)
     else:
         return jsonify(body)
+
+# route for administrative, can create users, view, edit and delete 
+@api.route('/administrative', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@login_required.role('administrative')
+def administrative():
+    error = False
+    body = {}
+
+    try:
+        if request.method == 'GET':
+            # Fetch all sections
+            seccion_1 = [sec.serialize() for sec in Seccion_1.query.all()]
+            seccion_2 = [sec.serialize() for sec in Seccion_2.query.all()]
+            seccion_3 = [sec.serialize() for sec in Seccion_3.query.all()]
+            seccion_4 = [sec.serialize() for sec in Seccion_4.query.all()]
+            seccion_5 = [sec.serialize() for sec in Seccion_5.query.all()]
+            seccion_6 = [sec.serialize() for sec in Seccion_6.query.all()]
+
+            # Combine all sections into the response body
+            body['seccion_1'] = seccion_1
+            body['seccion_2'] = seccion_2
+            body['seccion_3'] = seccion_3
+            body['seccion_4'] = seccion_4
+            body['seccion_5'] = seccion_5
+            body['seccion_6'] = seccion_6
+
+            # Fetch all users
+            users = [user.serialize() for user in User.query.all()]
+            body['users'] = users
+
+        elif request.method == 'POST':
+            # Create a new user
+            data = request.get_json()
+            new_user = User(
+                username=data['username'],
+                email=data['email'],
+                role=data['role'],
+                password=generate_password_hash(data['password'], method='pbkdf2:sha256:20000')
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            body['message'] = 'User created successfully.'
+
+        elif request.method == 'PUT':
+            # Update an existing user
+            data = request.get_json()
+            user = User.query.get(data['id'])
+            if user:
+                user.username = data['username']
+                user.email = data['email']
+                user.role = data['role']
+                if 'password' in data:
+                    user.password = generate_password_hash(data['password'], method='pbkdf2:sha256:20000')
+                db.session.commit()
+                body['message'] = 'User updated successfully.'
+            else:
+                error = True
+                body['message'] = 'User not found.'
+
+        elif request.method == 'DELETE':
+            # Delete a user
+            data = request.get_json()
+            user = User.query.get(data['id'])
+            if user:
+                db.session.delete(user)
+                db.session.commit()
+                body['message'] = 'User deleted successfully.'
+            else:
+                error = True
+                body['message'] = 'User not found.'
+
+    except Exception as e:
+        db.session.rollback()
+        error = True
+        print(sys.exc_info())
+    finally:
+        db.session.close()
+
+    if error:
+        abort(500)
+    else:
+        return jsonify(body)
