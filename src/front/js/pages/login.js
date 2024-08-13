@@ -39,12 +39,27 @@ export const Login = () => {
                 localStorage.setItem('access_token', response.data.access_token);
                 console.log("Stored Token: ", localStorage.getItem('access_token'));
                 console.log("Navigating ...");
-        
-                if (localStorage.getItem('access_token')) {
-                    navigate("/details_Sectors");
-        
+                
+                const role = response.data.role;
+
+                if (role) {
+                    // Navigate based on the role
+                    switch (role) {
+                        case "role1":
+                            navigate("/choose_1");
+                            break;
+                        case "role2":
+                            navigate("/choose_2");
+                            break;
+                        case "role3":
+                            navigate("/choose_3");
+                            break;
+                        default:
+                            navigate("/default_page"); // fallback route
+                            break;
+                    }
                 } else {
-                    console.log("Token not set");
+                    console.log("Role not provided");
                 }
             } else {
                 setAPIFlag(true);
@@ -102,9 +117,9 @@ export const Login = () => {
                 </div>
                 <br/>
                 {usernameFlag || apiFlag || passwordFlag ? (
-					<div className="login-message">
-                    	<p>{message}</p>
-					</div>
+                    <div className="login-message">
+                        <p>{message}</p>
+                    </div>
                 ) : null
                 }
                 <div className="text-center">
