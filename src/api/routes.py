@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, redirect, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from flask_cors import CORS, cross_origin
 from api.models import User, Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6,  db
 
@@ -124,3 +124,10 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({"success": "true", "msg": "User deleted"}), 204
+
+#route for logout
+@api.route('/logout', methods=['POST'])
+@jwt_required()
+def logout():
+    # Here, you can implement token blacklisting if needed
+    return jsonify({"success": "true", "msg": "User successfully logged out"}), 200
