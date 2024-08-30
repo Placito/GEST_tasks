@@ -56,6 +56,7 @@ export const Table_p = () => {
 						<td>@mdo</td>
 						<td>@mdo</td>
 						<td>@mdo</td>
+						<th>Last update:</th>
 						<td><i className="fa-solid fa-trash-can"></i></td>
 						</tr>
 						<tr>
@@ -66,6 +67,7 @@ export const Table_p = () => {
 						<td>@mdo</td>
 						<td>@mdo</td>
 						<td>@mdo</td>
+						<th>Last update:</th>
 						<td><i className="fa-solid fa-trash-can"></i></td>
 						</tr>
 					</tbody>
