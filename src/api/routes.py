@@ -1,5 +1,5 @@
 from asyncio import current_task
-from mailbox import Message
+from flask_mail import Mail, Message
 from flask import Blueprint, request, jsonify, redirect, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
@@ -8,6 +8,8 @@ from api.models import User, Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion
 
 api = Blueprint('api', __name__)
 CORS(api, resources={r"/api/*": {"origins": "*"}})
+
+mail = Mail(api)
 
 # Roles dictionary
 ROLES = {
