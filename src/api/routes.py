@@ -1,15 +1,18 @@
+import os
+from flask import Flask
 from asyncio import current_task
 from flask_mail import Mail, Message
 from flask import Blueprint, request, jsonify, redirect, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from flask_cors import CORS, cross_origin
-from api.models import User, Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6,  db
+from api.models import User, Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6, db
 
+app = Flask(__name__)
+
+mail = Mail(app)
 api = Blueprint('api', __name__)
 CORS(api, resources={r"/api/*": {"origins": "*"}})
-
-mail = Mail(api)
 
 # Roles dictionary
 ROLES = {
@@ -24,21 +27,17 @@ ROLES = {
 @api.route('/login', methods=['POST'])
 @cross_origin()
 def login_post():
-    # Retrieve username and password from the request
     username = request.json.get('username', None)
     password = request.json.get('password', None)
 
-    # Query the user by username
     user = User.query.filter_by(username=username).first()
 
     if user and check_password_hash(user.password, password):
         role = user.role
 
-        # Validate the role
         if role not in ROLES:
             return jsonify({"success": "false", "msg": "Invalid role assigned to the user"}), 400
 
-        # Redirect based on role
         if role == 'director':
             return redirect(url_for('choose_1'))
         elif role == 'administrative':
@@ -46,23 +45,19 @@ def login_post():
         elif role in ['technician', 'operator', 'quality']:
             return redirect(url_for('choose_3'))
 
-        # Create access token with role information
         access_token = create_access_token(identity=user.id, additional_claims={"role": role})
 
-        # Respond with success, token, and role
         return jsonify({"success": "true", "access_token": access_token, "role": role}), 200
 
     else:
-        # Respond with error if username or password is incorrect
         return jsonify({"success": "false", "msg": "Bad username or password"}), 401
 
-# endpoint for send an email with a link to reset password
+# Endpoint to send an email with a link to reset password
 @api.route("/resetPassword", methods=["POST"])
-@cross_origin(origin="process.env.FRONTEND_URL")
+@cross_origin(origin=os.getenv("FRONTEND_URL", "*"))
 def send_reset_email():
     try:
-        # Ensure that the request has the correct Content-Type header
-        if request.headers["Content-Type"] != "application/json":
+        if not request.is_json:
             return (
                 jsonify(
                     {
@@ -73,22 +68,17 @@ def send_reset_email():
             )
 
         email = request.json.get("email")
-        print(email)
-
-        # Query the database to check if the email exists
         user = User.query.filter_by(email=email).first()
-        print(user)
 
         if user is None:
             return jsonify({"msg": "User with this email does not exist."}), 404
         else:
-            # Generate an access token and construct the reset link
             token = create_access_token(identity=user.email)
-            link = f"https://silver-cod-gvp74jvvwjqc9vxp-3000.app.github.dev/newPassword?token={token}"
+            link = f"https://your_frontend_url/newPassword?token={token}"
 
             message = Message(
                 subject="Password Reset Link",
-                sender=current_task.config["MAIL_USERNAME"],
+                sender=app.config["MAIL_USERNAME"],
                 recipients=[email],
                 body="Hey, this is a link for resetting the password.",
                 html=f"Reset your password with this link: <a href='{link}'>Reset Password</a>",
@@ -109,55 +99,65 @@ def reset_password():
         password = request.json.get("password", None)
         email = get_jwt_identity()
 
-        # Query the database to check if the email exists
         user = User.query.filter_by(email=email).first()
         if user is None:
             return jsonify({"msg": "User with this email does not exist."}), 404
-        # Update the user's password
-        User.password = password
-        print(User.password)
-        # Commit the changes to the database
+
+        user.password = generate_password_hash(password)
         db.session.commit()
 
         return jsonify({"msg": "Password reset successful."}), 200
     except Exception as e:
         return jsonify({"msg": "An error occurred", "error": str(e)}), 500
-    
+
 # Routes for sectors
 @api.route('/sectors', methods=['GET'])
 def get_sectors():
-    sectors = [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6].query.all()
+    sectors = []
+    for section in [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6]:
+        sectors.extend(section.query.all())
     return jsonify([sector.serialize() for sector in sectors])
 
 @api.route('/sectors/<int:id>', methods=['GET'])
 def get_sector(id):
-    sectors = [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6].query.all()
-    return jsonify(sectors.serialize())
+    for section in [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6]:
+        sector = section.query.get(id)
+        if sector:
+            return jsonify(sector.serialize())
+    return jsonify({"msg": "Sector not found"}), 404
 
 @api.route('/sectors', methods=['POST'])
 def create_sector():
     data = request.json
-    new_sector = [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6](name=data['name'], description=data.get('description'))
+    section_class = get_section_class_from_name(data['name'])
+    if not section_class:
+        return jsonify({"msg": "Invalid sector name"}), 400
+    new_sector = section_class(name=data['name'], description=data.get('description'))
     db.session.add(new_sector)
     db.session.commit()
     return jsonify(new_sector.serialize()), 201
 
 @api.route('/sectors/<int:id>', methods=['PUT'])
 def update_sector(id):
-    sectors = [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6].query.all()
     data = request.json
-    sectors.name = data.get('name', sectors.name)
-    sectors.description = data.get('description', sectors.description)
-    db.session.commit()
-    return jsonify(sectors.serialize())
+    for section in [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6]:
+        sector = section.query.get(id)
+        if sector:
+            sector.name = data.get('name', sector.name)
+            sector.description = data.get('description', sector.description)
+            db.session.commit()
+            return jsonify(sector.serialize())
+    return jsonify({"msg": "Sector not found"}), 404
 
 @api.route('/sectors/<int:id>', methods=['DELETE'])
 def delete_sector(id):
-    sectors = [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6].query.all()
-    db.session.delete(sectors)
-    db.session.commit()
-    return jsonify({"success": "true", "msg": "Sector deleted"}), 204
-
+    for section in [Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6]:
+        sector = section.query.get(id)
+        if sector:
+            db.session.delete(sector)
+            db.session.commit()
+            return jsonify({"success": "true", "msg": "Sector deleted"}), 204
+    return jsonify({"msg": "Sector not found"}), 404
 
 # Routes for users
 @api.route('/users', methods=['GET'])
@@ -195,9 +195,20 @@ def delete_user(id):
     db.session.commit()
     return jsonify({"success": "true", "msg": "User deleted"}), 204
 
-#route for logout
+# Route for logout
 @api.route('/logout', methods=['POST'])
 @jwt_required()
 def logout():
     # Here, you can implement token blacklisting if needed
     return jsonify({"success": "true", "msg": "User successfully logged out"}), 200
+
+def get_section_class_from_name(name):
+    section_map = {
+        'Seccion_1': Seccion_1,
+        'Seccion_2': Seccion_2,
+        'Seccion_3': Seccion_3,
+        'Seccion_4': Seccion_4,
+        'Seccion_5': Seccion_5,
+        'Seccion_6': Seccion_6,
+    }
+    return section_map.get(name)
