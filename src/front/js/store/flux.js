@@ -87,19 +87,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return false;
 			},
 			//function that allows to update users
-			update: (index, user) => {
-				const store = getStore();
-			console.log(index, user)
-				const updateUser = store.users.map((c, i) => {
-					if (index == i) {
-						c = user
-					}
-					return c
-				});
+			update: (index, updatedTask) => {
+                const store = getStore();
+                const tasks = [...store.tasks];
+                
+                // Update the specific task at the given index
+                tasks[index] = updatedTask;
 
-			console.log("test", user)
-				setStore({ users: updateUser });
-			},
+                // Update the global state with the modified tasks array
+                setStore({ tasks: tasks });
+
+                // Optional: If you're working with an API, you can also send the update request
+                fetch(`https://jsonplaceholder.typicode.com/todos/${index}`, {
+                    method: 'PUT', // or 'PATCH' depending on your API
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ title: updatedTask })
+                })
+                .then(response => response.json())
+                .then(data => console.log('Update Success:', data))
+                .catch(error => console.error('Update Error:', error));
+            }
+        },
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
