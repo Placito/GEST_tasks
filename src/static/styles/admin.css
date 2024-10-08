@@ -1,8 +1,51 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif; /* Change to your preferred font */
-    background-color: #f8f9fa; /* Light background color */
-    color: #333; /* Dark text color for better readability */
+    display: flex;
+    margin: 0;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #1B3255; /* Dark blue background for the sidebar */
+    width: 250px; /* Fixed width for the sidebar */
+    padding: 20px; /* Padding inside the sidebar */
+    color: #056FAA; /* Text color for sidebar */
+    font-weight: 400; /* Regular font weight */
+    font-size: 20px; /* Font size for sidebar text */
+    position: relative; /* Relative positioning for sidebar */
+}
+
+.sidebar h1 {
+    text-align: center; /* Center align heading in sidebar */
+    font-size: 30px; /* Font size for sidebar heading */
+    color: white; /* White color for sidebar heading */
+}
+
+.sidebar ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+}
+
+.sidebar ul li {
+    margin: 15px 0; /* Margin for each sidebar list item */
+}
+
+.sidebar ul li a {
+    color: #056FAA; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px; /* Padding for links */
+    display: block; /* Block display for full area clickability */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.sidebar ul li a:hover {
+    background-color: #056FAA; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+.content {
+    flex-grow: 1; /* Allow content area to grow */
+    padding: 20px; /* Padding inside the content area */
 }
 
 /* Navbar styles */

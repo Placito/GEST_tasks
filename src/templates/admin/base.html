@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Admin - MyApp{% endblock %}</title>
+    <title>{% block title %}Admin - GEST_Tasks{% endblock %}</title>
     
     <!-- Bootstrap CSS for Flask-Admin -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,36 +20,40 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #1B3255; color: white;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/admin/" style="color: white;">Admin Dashboard</a>
+                <a class="navbar-brand" href="/admin/" style="color: white;">GEST Dashboard</a>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="/admin/user" style="color: white;">Users</a></li>
-                <li><a href="/admin/seccion_1" style="color: white;">Sector 1</a></li>
-                <li><a href="/admin/seccion_2" style="color: white;">Sector 2</a></li>
-                <li><a href="/admin/seccion_3" style="color: white;">Sector 3</a></li>
-                <li><a href="/admin/seccion_4" style="color: white;">Sector 4</a></li>
-                <li><a href="/admin/seccion_5" style="color: white;">Sector 5</a></li>
-                <li><a href="/admin/seccion_6" style="color: white;">Sector 6</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/" style="color: white;">Back to Site</a></li>
-            </ul>
         </div>
     </nav>
 
-    <!-- Main content -->
-    <div class="container" style="margin-top: 70px;">
-        <div class="row">
-            <div class="col-md-12">
-                {% block content %}
-                <!-- This is where the page-specific content will be injected -->
-                {% endblock %}
-            </div>
+    <!-- Main content area with sidebar -->
+    <div style="display: flex; margin-top: 70px;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h1>Admin Panel</h1>
+            <ul class="nav navbar-nav">
+                <li><a href="/admin/user">Users</a></li>
+                <li><a href="/admin/seccion_1">Sector 1</a></li>
+                <li><a href="/admin/seccion_2">Sector 2</a></li>
+                <li><a href="/admin/seccion_3">Sector 3</a></li>
+                <li><a href="/admin/seccion_4">Sector 4</a></li>
+                <li><a href="/admin/seccion_5">Sector 5</a></li>
+                <li><a href="/admin/seccion_6">Sector 6</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Back to Site</a></li>
+            </ul>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            {% block content %}
+            <!-- Main content will be rendered here -->
+            {% endblock %}
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer" style="background-color: #1B3255; color: white; padding: 20px; text-align: center; margin-top: 50px;">
+    <footer class="footer">
         <p>&copy; 2024 MyApp Admin Panel</p>
     </footer>
 
