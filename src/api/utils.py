@@ -20,6 +20,14 @@ def has_no_empty_params(rule):
     arguments = rule.arguments if rule.arguments is not None else ()
     return len(defaults) >= len(arguments)
 
+# Custom titles for specific routes
+custom_titles = {
+    "/": "Home",
+    "/admin/": "Admin Dashboard",
+    "/api/users": "Users",
+    "/api/sectors": "Sectors",
+}
+
 def generate_sitemap(app):
     links = ['/admin/']
     for rule in app.url_map.iter_rules():
@@ -30,7 +38,11 @@ def generate_sitemap(app):
             if "/admin/" not in url:
                 links.append(url)
 
-    links_html = "".join(["<li><a href='" + y + "'>" + y + "</a></li>" for y in links])
+    # Create HTML list items with custom titles
+    links_html = "".join([
+        f"<li><a href='{url}'>{custom_titles.get(url, url)}</a></li>" 
+        for url in links
+    ])
 
     return """
     <style>
@@ -41,9 +53,11 @@ def generate_sitemap(app):
         }
     </style>
     <body>
-        <nav style="background-color: #1B3255; color: #056FAA; font-weight: 400; font-size: 30px;">
-            <h1>Welcome to your dasboard!!</h1>
-            <ul style="text-align: left;">"""+links_html+"""</ul>
+        <nav style="background-color: #1B3255; color: #056FAA; font-weight: 400; font-size: 30px; margin-bottom: 12px;">
+        <br/>
+            <h1 style="text-align: center;">Welcome to your dasboard!!</h1>
+            <br/>
         </nav>
-        
+        <br/>
+        <ul style="text-align: left; margin-left: 30px;">"""+links_html+"""</ul>
     </body>"""
