@@ -15,9 +15,9 @@ def setup_admin(app):
     # Add User model to the admin with an icon
     admin.add_view(ModelView(User, db.session))
     # Add Seccion models to the admin with icons and change the display name to "sectors"
-    admin.add_view(ModelView(Seccion_1, db.session, category='Seccions', name='Sector 1', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
-    admin.add_view(ModelView(Seccion_2, db.session, category='Seccions', name='Sector 2', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
-    admin.add_view(ModelView(Seccion_3, db.session, category='Seccions', name='Sector 3', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
-    admin.add_view(ModelView(Seccion_4, db.session, category='Seccions', name='Sector 4', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
-    admin.add_view(ModelView(Seccion_5, db.session, category='Seccions', name='Sector 5', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
-    admin.add_view(ModelView(Seccion_6, db.session, category='Seccions', name='Sector 6', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
+    admin.add_view(ModelView(Seccion_1, db.session, category='Sectors', name='Sector 1', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
+    admin.add_view(ModelView(Seccion_2, db.session, category='Sectors', name='Sector 2', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
+    admin.add_view(ModelView(Seccion_3, db.session, category='Sectors', name='Sector 3', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
+    admin.add_view(ModelView(Seccion_4, db.session, category='Sectors', name='Sector 4', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
+    admin.add_view(ModelView(Seccion_5, db.session, category='Sectors', name='Sector 5', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))
+    admin.add_view(ModelView(Seccion_6, db.session, category='Sectors', name='Sector 6', menu_icon_type='glyph', menu_icon_value='glyphicon-list-alt'))

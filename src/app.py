@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, send_from_directory, redirect, url_for
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
@@ -34,10 +34,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-# add the admin interface
+# Add the admin interface
 setup_admin(app)
 
-# add custom commands
+# Add custom commands
 setup_commands(app)
 
 # Register API endpoints
@@ -48,8 +48,14 @@ app.register_blueprint(api, url_prefix='/api')
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
-# Generate sitemap with all endpoints
+# Redirect from root URL to /admin/
 @app.route('/')
+def root_to_admin():
+    """Redirect root URL to /admin/"""
+    return redirect(url_for('admin.index'))
+
+# Generate sitemap with all endpoints for development environment
+@app.route('/sitemap')
 def sitemap():
     """Generate a sitemap with all endpoints."""
     if ENV == "development":
@@ -75,7 +81,6 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized_handler():
     return jsonify({"success": "false", "msg": "Unauthorized"}), 401
-
 
 # Run the app if executed directly
 if __name__ == '__main__':
