@@ -18,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			token: [],
-			users: [],
+			users: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -126,6 +126,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 		}
 	};
-};
+
 
 export default getState;

@@ -22,6 +22,7 @@ flask-jwt-extended = "*"
 flask-mail = "*"
 cors = "*"
 werkzeug = "*"
+flask-login = "*"
 
 [requires]
 python_version = "3.10"
