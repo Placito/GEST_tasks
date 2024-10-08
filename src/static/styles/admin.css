@@ -1,0 +1,84 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif; /* Change to your preferred font */
+    background-color: #f8f9fa; /* Light background color */
+    color: #333; /* Dark text color for better readability */
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #1B3255; /* Dark blue background for the navbar */
+    border: none; /* Remove borders */
+}
+
+.navbar-brand, .navbar-nav > li > a {
+    color: #ffffff !important; /* White text for navbar items */
+    font-weight: bold; /* Bold text for better visibility */
+}
+
+.navbar-brand:hover, .navbar-nav > li > a:hover {
+    color: #f0ad4e !important; /* Hover color for navbar items */
+}
+
+/* Container styles */
+.container {
+    padding: 20px; /* Add some padding to the container */
+}
+
+/* Table Styles */
+.table {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full width tables */
+    margin-bottom: 20px; /* Space below tables */
+}
+
+.table th, .table td {
+    border: 1px solid #dee2e6; /* Light gray border */
+    padding: 10px; /* Padding for table cells */
+    text-align: left; /* Left align text */
+}
+
+.table th {
+    background-color: #343a40; /* Dark background for header */
+    color: white; /* White text for header */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #1B3255; /* Dark background for footer */
+    color: #ffffff; /* White text for footer */
+    padding: 10px 0; /* Padding for footer */
+    position: relative; /* Position footer */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+}
+
+/* Alert styles */
+.alert {
+    margin-bottom: 20px; /* Margin below alerts */
+}
+
+/* Button styles */
+.btn-custom {
+    background-color: #5cb85c; /* Custom green button */
+    color: white; /* White text */
+}
+
+.btn-custom:hover {
+    background-color: #4cae4c; /* Darker green on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar-nav {
+        float: none; /* Stack navbar items vertically */
+    }
+
+    .navbar-header {
+        float: none; /* Center the brand name */
+    }
+
+    .container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+}
