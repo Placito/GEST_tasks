@@ -45,6 +45,9 @@ body {
     display: block; /* Block display for full area clickability */
     transition: background-color 0.3s; /* Smooth background transition */
 }
+.dropdown-section {
+    width: 100%;
+}
 
 .sidebar ul li a:hover {
     background-color: #056FAA; /* Background color on hover */

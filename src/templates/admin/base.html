@@ -11,9 +11,6 @@
     <!-- Custom Admin Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/admin.css') }}">
     
-    {% block styles %}
-    <!-- Additional styles specific to pages can be included here -->
-    {% endblock %}
 </head>
 <body>
     <!-- Main Navigation Bar -->
@@ -34,13 +31,22 @@
         <div class="sidebar">
             <h1>Admin Panel</h1>
             <ul class="nav navbar-nav">
-                <li><a href="/admin/user">Users</a></li>
-                <li><a href="/admin/seccion_1">Sector 1</a></li>
-                <li><a href="/admin/seccion_2">Sector 2</a></li>
-                <li><a href="/admin/seccion_3">Sector 3</a></li>
-                <li><a href="/admin/seccion_4">Sector 4</a></li>
-                <li><a href="/admin/seccion_5">Sector 5</a></li>
-                <li><a href="/admin/seccion_6">Sector 6</a></li>
+                <!-- Corrected link for Users -->
+                <li><a href="{{ url_for('user.index_view') }}">Users</a></li>
+                <!-- Correct Dropdown for Bootstrap 3 -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Sectors <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-section">
+                        <li><a href="{{ url_for('seccion_1.index_view') }}">Sector 1</a></li>
+                        <li><a href="{{ url_for('seccion_2.index_view') }}">Sector 2</a></li>
+                        <li><a href="{{ url_for('seccion_3.index_view') }}">Sector 3</a></li>
+                        <li><a href="{{ url_for('seccion_4.index_view') }}">Sector 4</a></li>
+                        <li><a href="{{ url_for('seccion_5.index_view') }}">Sector 5</a></li>
+                        <li><a href="{{ url_for('seccion_6.index_view') }}">Sector 6</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 
@@ -60,7 +66,6 @@
     <!-- JavaScript files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     {% block scripts %}
     <!-- Additional scripts for specific pages can be included here -->
     {% endblock %}
