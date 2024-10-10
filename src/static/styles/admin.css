@@ -1,15 +1,22 @@
 /* General Styles */
+/* CSS Grid Layout */
 body {
-    display: flex;
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Navbar, Main, Footer */
+    height: 100vh; /* Full viewport height */
     margin: 0;
-    height: 100vh;
+}
+
+.main-content {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidebar and Main content */
 }
 
 .sidebar {
-    background-color: #1B3255; /* Dark blue background for the sidebar */
-    width: 250px; /* Fixed width for the sidebar */
+    background-color: rgba(27, 50, 85, 0.8); /* Dark blue background with 40% opacity */
+    margin: 60px 0 10px 10px;
     padding: 20px; /* Padding inside the sidebar */
-    color: #056FAA; /* Text color for sidebar */
     font-weight: 400; /* Regular font weight */
     font-size: 20px; /* Font size for sidebar text */
     position: relative; /* Relative positioning for sidebar */
@@ -18,7 +25,7 @@ body {
 .sidebar h1 {
     text-align: center; /* Center align heading in sidebar */
     font-size: 30px; /* Font size for sidebar heading */
-    color: white; /* White color for sidebar heading */
+    color: #000; 
 }
 
 .sidebar ul {
@@ -28,6 +35,7 @@ body {
 
 .sidebar ul li {
     margin: 15px 0; /* Margin for each sidebar list item */
+    width: 100%;
 }
 
 .sidebar ul li a {
@@ -46,12 +54,15 @@ body {
 .content {
     flex-grow: 1; /* Allow content area to grow */
     padding: 20px; /* Padding inside the content area */
+    background-color: rgba(27, 50, 85, 0.8); /* Dark blue background with 40% opacity */
+    margin: 60px 10px 10px 10px;
 }
 
 /* Navbar styles */
 .navbar {
     background-color: #1B3255; /* Dark blue background for the navbar */
     border: none; /* Remove borders */
+    grid-row: 1;
 }
 
 .navbar-brand, .navbar-nav > li > a {
@@ -90,10 +101,11 @@ body {
 .footer {
     background-color: #1B3255; /* Dark background for footer */
     color: #ffffff; /* White text for footer */
-    padding: 10px 0; /* Padding for footer */
+    padding: 10px; /* Padding for footer */
     position: relative; /* Position footer */
     bottom: 0; /* Stick to the bottom */
     width: 100%; /* Full width */
+    grid-row: 3;
 }
 
 /* Alert styles */
