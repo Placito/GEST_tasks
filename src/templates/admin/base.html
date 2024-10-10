@@ -53,7 +53,7 @@
         <!-- Content Area -->
         <div class="content">
             {% block content %}
-            <!-- Main content will be rendered here -->
+                <img src="{{ url_for('static', filename='img/task.jpg') }}" alt="Welcome Image" class="task" >
             {% endblock %}
         </div>
     </div>
@@ -66,6 +66,7 @@
     <!-- JavaScript files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     {% block scripts %}
     <!-- Additional scripts for specific pages can be included here -->
     {% endblock %}
