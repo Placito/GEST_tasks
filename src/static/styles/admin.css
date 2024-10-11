@@ -59,6 +59,7 @@ body {
     background-color: rgba(27, 50, 85, 0.8); /* Dark blue background with 40% opacity */
     margin: 60px 10px 10px 10px;
     position: relative; /* Ensure positioning context for absolute children */
+    z-index: 1;
 }
 
 /* Navbar styles */
@@ -87,6 +88,8 @@ body {
     border-collapse: collapse; /* Collapse borders */
     width: 100%; /* Full width tables */
     margin-bottom: 20px; /* Space below tables */
+    z-index: 3;
+    position: relative;
 }
 
 .table th, .table td {
@@ -136,6 +139,16 @@ body {
     background-repeat: no-repeat; /* Do not repeat the image */
     position: absolute;
     opacity: 0.4;
+    z-index: 2;
+}
+.welcome {
+    color: #000;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 30%;
+    text-decoration: underline;
+    z-index: 3;
+    position: relative;
 }
 
 /* Responsive styles */
