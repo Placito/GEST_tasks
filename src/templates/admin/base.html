@@ -75,17 +75,31 @@
     <!-- JavaScript files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery for dynamic content loading -->
     <script>
         $(document).ready(function() {
             // When any sidebar link is clicked
             $('.sidebar-link').on('click', function(event) {
                 event.preventDefault();  // Prevent page reload
+
                 const url = $(this).attr('href');
+
+                // Hide the welcome section
                 $('#welcome-section').hide();
+
+                // Show the dynamic content section
                 $('#dynamic-content').show();
+
+                // Load content from the clicked link
+                $('#dynamic-content').load(url + ' .admin-content', function(response, status, xhr) {
+                    if (status === "error") {
+                        console.log("Error loading content: " + xhr.status + " " + xhr.statusText);
+                    }
+                });
             });
         });
     </script>
+
     {% block scripts %}
     <!-- Additional scripts for specific pages can be included here -->
     {% endblock %}
