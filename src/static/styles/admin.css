@@ -58,6 +58,10 @@ body {
     flex-grow: 1; /* Allow content area to grow */
     background-color: rgba(27, 50, 85, 0.8); /* Dark blue background with 40% opacity */
     margin: 60px 10px 10px 10px;
+}
+
+.welcome-section {
+    height: 95%; 
     position: relative; /* Ensure positioning context for absolute children */
     z-index: 1;
 }
@@ -141,14 +145,14 @@ body {
     opacity: 0.4;
     z-index: 2;
 }
-.welcome {
+.msg {
     color: #000;
     font-weight: 500;
     text-align: center;
-    margin-top: 25%;
     text-decoration: underline;
     z-index: 3;
     position: relative;
+    padding-top: 30%;
 }
 
 /* Responsive styles */
