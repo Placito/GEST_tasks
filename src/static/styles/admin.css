@@ -56,9 +56,9 @@ body {
 
 .content {
     flex-grow: 1; /* Allow content area to grow */
-    padding: 20px; /* Padding inside the content area */
     background-color: rgba(27, 50, 85, 0.8); /* Dark blue background with 40% opacity */
     margin: 60px 10px 10px 10px;
+    position: relative; /* Ensure positioning context for absolute children */
 }
 
 /* Navbar styles */
@@ -129,10 +129,13 @@ body {
 .task {
     width: 100%; /* Set to full width of the parent */
     height: 100%; /* Set to full height of the parent */
+    padding: 20px; /* Padding inside the content area */
     background-size: cover; /* Cover the entire area */
-    background-position: center; /* Center the image */
+    justify-items: center;
+    margin: auto;
     background-repeat: no-repeat; /* Do not repeat the image */
-    position: relative; /* Ensure positioning context for absolute children */
+    position: absolute;
+    opacity: 0.4;
 }
 
 /* Responsive styles */
