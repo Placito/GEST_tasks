@@ -12,7 +12,7 @@ from flask_jwt_extended import JWTManager
 from flask_login import LoginManager
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
-static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
+static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static')
 
 app = Flask(__name__, template_folder="templates")
 
