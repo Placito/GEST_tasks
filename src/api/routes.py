@@ -8,6 +8,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_tok
 from flask_cors import CORS, cross_origin
 from api.models import User, Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccion_5, Seccion_6, db
 from api.admin import setup_admin
+import logging
 
 app = Flask(__name__)
 
@@ -15,6 +16,7 @@ mail = Mail(app)
 api = Blueprint('api', __name__)
 CORS(api, resources={r"/api/*": {"origins": "*"}})
 setup_admin(app)
+logging.basicConfig(level=logging.DEBUG)
 
 # Roles dictionary
 ROLES = {
