@@ -6,8 +6,8 @@ from .models import db, User, Seccion_1, Seccion_2, Seccion_3, Seccion_4, Seccio
 
 def setup_admin(app):
     app.secret_key = os.environ.get('FLASK_APP_KEY', 'sample key')
-    app.config['FLASK_ADMIN_SWATCH'] = 'darkly'
-    app.config['FLASK_ADMIN_CSS'] = 'front/styles/custom_admin_styles.css'  # Make sure this path is correct
+    app.config['FLASK_ADMIN_CSS'] = 'front/styles/custom_admin_styles.css'
+    admin = Admin(app, name='GEST Admin', base_template='admin/base.html')
 
     admin = Admin(app, name='GEST Admin', base_template='admin/base.html')  # Ensure this points to your custom base template
 
