@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
+            "email": self.email,
             "role": self.role,
             # do not serialize the password, its a security breach
         }
@@ -48,7 +49,7 @@ class Seccion_1(db.Model):
         'id': self.id,
         'name': self.name,
         'manufacturer': self.manufacturer,
-        'material': self.material,
+        'gender': self.gender,
         'type': self.type,
         'price': str(self.price),  
         }
@@ -68,7 +69,7 @@ class Seccion_2(db.Model):
         'id': self.id,
         'name': self.name,
         'manufacturer': self.manufacturer,
-        'material': self.material,
+        'gender': self.gender,
         'type': self.type,
         'price': str(self.price),  
         }
@@ -88,7 +89,7 @@ class Seccion_3(db.Model):
         'id': self.id,
         'name': self.name,
         'manufacturer': self.manufacturer,
-        'material': self.material,
+        'gender': self.gender,
         'type': self.type,
         'price': str(self.price),  
         }
@@ -108,7 +109,7 @@ class Seccion_4(db.Model):
         'id': self.id,
         'name': self.name,
         'manufacturer': self.manufacturer,
-        'material': self.material,
+        'gender': self.gender,
         'type': self.type,
         'price': str(self.price),  
         }
@@ -128,7 +129,7 @@ class Seccion_5(db.Model):
         'id': self.id,
         'name': self.name,
         'manufacturer': self.manufacturer,
-        'material': self.material,
+        'gender': self.gender,
         'type': self.type,
         'price': str(self.price),  
         }
@@ -148,7 +149,7 @@ class Seccion_6(db.Model):
         'id': self.id,
         'name': self.name,
         'manufacturer': self.manufacturer,
-        'material': self.material,
+        'gender': self.gender,
         'type': self.type,
         'price': str(self.price),  
         }
