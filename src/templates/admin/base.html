@@ -81,25 +81,24 @@
             // When any sidebar link is clicked
             $('.sidebar-link').on('click', function(event) {
                 event.preventDefault();  // Prevent page reload
-
-                const url = $(this).attr('href');
-
+    
+                const url = $(this).attr('href');  // Get the URL from the clicked link
+    
                 // Hide the welcome section
                 $('#welcome-section').hide();
-
+    
                 // Show the dynamic content section
                 $('#dynamic-content').show();
-                console.log("dynamic-conntente showing");
-
+    
                 // Load content from the clicked link
-                $('#dynamic-content').load(url + ' .admin-content', function(response, status, xhr) {
+                $('#dynamic-content').load(url, function(response, status, xhr) {
                     if (status === "error") {
                         console.log("Error loading content: " + xhr.status + " " + xhr.statusText);
                     }
                 });
             });
         });
-    </script>
+    </script>    
 
     {% block scripts %}
     <!-- Additional scripts for specific pages can be included here -->
